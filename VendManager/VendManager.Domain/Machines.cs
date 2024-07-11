@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendManager.Domain.Common;
 
 namespace VendManager.Domain
 {
-    public class Machines
+    public class Machines : BaseEntity
     {
-        public int Id { get; set; }
+  
         public string Name { get; set; }
         public string SerialNumber { get; set; }
         public string Location { get; set; }
