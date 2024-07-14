@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Domain;
 
 namespace VendManager.Application.MappingProfiles
@@ -12,7 +8,7 @@ namespace VendManager.Application.MappingProfiles
     {
         public MachineProfile()
         {
-          //  CreateMap<Machines, MachineGroupsDto>().ReverseMap();
+            CreateMap<Machines, MachineDto>().ReverseMap();
         }
 
     }
