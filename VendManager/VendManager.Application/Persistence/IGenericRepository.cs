@@ -15,6 +15,4 @@ namespace VendManager.Application.Persistence
         Task DeleteAsync(T entity);
     }
 
-  
-
 }
