@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendManager.Application.Exceptions;
 using VendManager.Application.Persistence;
 
 namespace VendManager.Application.Features.Machines.Command.CreateMachine
@@ -21,7 +22,11 @@ namespace VendManager.Application.Features.Machines.Command.CreateMachine
         public async Task<int> Handle(CreateMachineCommand request, CancellationToken cancellationToken)
         {
             //Validate Incoming Data
+            var validator = new CreateMachineValidator();
+            var validationResult = await validator.ValidateAsync(request);
 
+            if (validationResult.Errors.Count > 0)
+                throw new BadRequestException("Invalid Machine" , validationResult);
             //Convert from DTO to Entity
             var machine = _mapper.Map<Domain.Machines>(request);
 
