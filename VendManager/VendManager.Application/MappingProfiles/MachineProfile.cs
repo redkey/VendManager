@@ -9,6 +9,7 @@ namespace VendManager.Application.MappingProfiles
         public MachineProfile()
         {
             CreateMap<Machines, MachineDto>().ReverseMap();
+         //   CreateMap<Machines, MachineDto>().ReverseMap();
         }
 
     }
