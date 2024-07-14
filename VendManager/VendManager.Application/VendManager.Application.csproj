@@ -10,4 +10,8 @@
     <Folder Include="Contracts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VendManager.Domain\VendManager.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
