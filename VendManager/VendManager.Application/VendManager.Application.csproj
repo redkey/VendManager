@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Contracts\" />
+    <Folder Include="Features\Machines\Command\" />
+    <Folder Include="Features\Machines\Query\GetAllMachines\" />
   </ItemGroup>
 
   <ItemGroup>
