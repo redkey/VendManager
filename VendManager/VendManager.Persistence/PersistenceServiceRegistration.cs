@@ -12,11 +12,11 @@ namespace VendManager.Persistence
         {
             services.AddDbContext<VendorManagerDbContext>(options =>
             {
-                options.UseSqlServer("VendManagerDatabaseConnection");
+                options.UseSqlServer(configuration.GetConnectionString("VendManagerDatabaseConnection"));
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IMachineGroupRepository, MachineGroupRepository>();
+            services.AddScoped<IMachineRepository, MachineGroupRepository>();
             services.AddScoped<IMachinesRepository, MachinesRepository>();
             services.AddScoped<ISensorBarRepository, SensorBarRepository>();
             services.AddScoped<ISensorRepository, SensorRepository>();

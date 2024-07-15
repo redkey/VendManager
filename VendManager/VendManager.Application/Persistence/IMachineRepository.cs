@@ -2,10 +2,11 @@
 
 namespace VendManager.Application.Persistence
 {
-    public interface IMachineGroupRepository : IGenericRepository<MachineGroups>
+    public interface IMachineRepository : IGenericRepository<MachineGroups>
     { 
     }
 
   
 
 }
+    

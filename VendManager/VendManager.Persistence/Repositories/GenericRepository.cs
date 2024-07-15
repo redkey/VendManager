@@ -32,7 +32,8 @@ namespace VendManager.Persistence.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().AsNoTracking().ToListAsync();
+            var result = await _context.Set<T>().AsNoTracking().ToListAsync();
+            return result;
         }
 
         public async Task<T> GetByIdAsync(int id)

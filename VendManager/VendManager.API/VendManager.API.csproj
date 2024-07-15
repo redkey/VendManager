@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\VendManager.Application\VendManager.Application.csproj" />
+    <ProjectReference Include="..\VendManager.Infrastructure\VendManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\VendManager.Persistence\VendManager.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

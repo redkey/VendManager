@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VendManager.Application.Features.Machines.Command.CreateMachine
 {
-    public class CreateMachineCommand : IRequest<int>
+    public class CreateMachineCommand : IRequest<long>
     {
         public string Name { get; set; } = string.Empty;
         public string SerialNumber { get; set; } = string.Empty;

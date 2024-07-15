@@ -10,7 +10,7 @@ using VendManager.Application.Persistence;
 
 namespace VendManager.Application.Features.Machines.Command.CreateMachine
 {
-    public class CreateMachineCommandHandler : IRequestHandler<CreateMachineCommand, int>
+    public class CreateMachineCommandHandler : IRequestHandler<CreateMachineCommand, long>
     {
         private protected IMapper _mapper;
         private protected IMachinesRepository _machinesRepository;
@@ -19,7 +19,7 @@ namespace VendManager.Application.Features.Machines.Command.CreateMachine
             _machinesRepository = machinesRepository;
             _mapper = mapper;
         }
-        public async Task<int> Handle(CreateMachineCommand request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateMachineCommand request, CancellationToken cancellationToken)
         {
             //Validate Incoming Data
             var validator = new CreateMachineValidator();
