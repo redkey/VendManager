@@ -1,4 +1,5 @@
 
+using VendManager.API.Middleware;
 using VendManager.Application;
 using VendManager.Infrastructure;
 using VendManager.Persistence;
@@ -30,6 +31,9 @@ namespace VendManager.API
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
