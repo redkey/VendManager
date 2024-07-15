@@ -19,11 +19,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Domain", "VendM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Application", "VendManager.Application\VendManager.Application.csproj", "{0D28B5D6-0EBF-49DC-B4F5-77B7FE7C30FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.Persistence", "VendManager.Persistence\VendManager.Persistence.csproj", "{B72B6516-EA3A-4942-8E64-86E0DD47AB44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Persistence", "VendManager.Persistence\VendManager.Persistence.csproj", "{B72B6516-EA3A-4942-8E64-86E0DD47AB44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.Infrastructure", "VendManager.Infrastructure\VendManager.Infrastructure.csproj", "{D1D487E9-768F-45BC-8E62-55DB0B51DE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Infrastructure", "VendManager.Infrastructure\VendManager.Infrastructure.csproj", "{D1D487E9-768F-45BC-8E62-55DB0B51DE34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.API", "VendManager.API\VendManager.API.csproj", "{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.API", "VendManager.API\VendManager.API.csproj", "{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.BlazorUI", "VendManager.BlazorUI\VendManager.BlazorUI.csproj", "{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2} = {B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +56,10 @@ Global
 		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
