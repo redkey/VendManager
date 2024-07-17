@@ -1,4 +1,7 @@
+using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
+using VendManager.BlazorUI.Services;
+using VendManager.BlazorUI.Services.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,9 @@ builder.Services.AddDevExpressBlazor(options => {
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.WebHost.UseWebRoot("wwwroot");
 builder.WebHost.UseStaticWebAssets();
+
+builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
+builder.Services.AddScoped<IMachineService, MachineService>();
 
 var app = builder.Build();
 
