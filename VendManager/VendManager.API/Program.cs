@@ -44,6 +44,7 @@ namespace VendManager.API
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowAll");
             app.UseAuthorization();
 
 

@@ -1,0 +1,45 @@
+﻿@page "/machines"
+
+<h3>Machines</h3>
+
+<div class="m-2 d-flex justify-content-end">
+    <button @onclick="CreateMachine" class="btn btn-success">Add Machine</button>
+</div>
+
+@Message
+
+@if(Machines == null)
+{
+    <p>Loading Data .......</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Machine ID</th>
+                <th>Machine Name</th>
+                <th>Machine Location</th>
+                <th>Machine Notes</th>
+                <th>Enabled</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var machine in Machines)
+            {
+                <tr>
+                    <td>@machine.ID</td>
+                    <td>@machine.Name</td>
+                    <td>@machine.Location</td>
+                    <td>@machine.Notes</td>
+                    <td>@machine.Enabled</td>
+                    <td>
+                        <button class="btn btn-primary">Edit</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

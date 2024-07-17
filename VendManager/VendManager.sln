@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.API", "VendManager.API\VendManager.API.csproj", "{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.BlazorUI", "VendManager.BlazorUI\VendManager.BlazorUI.csproj", "{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.BlazorUI", "VendManager.BlazorUI\VendManager.BlazorUI.csproj", "{D2C883DD-19B0-4E8E-8438-CFEDEC17457D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2} = {B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}
 	EndProjectSection

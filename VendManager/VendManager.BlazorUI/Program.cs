@@ -1,3 +1,4 @@
+using System.Reflection;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
 using VendManager.BlazorUI.Services;
@@ -18,6 +19,7 @@ builder.WebHost.UseStaticWebAssets();
 
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
 builder.Services.AddScoped<IMachineService, MachineService>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 

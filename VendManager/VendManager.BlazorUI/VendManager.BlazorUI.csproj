@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="DevExpress.Blazor" Version="23.2.3" />
     <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="23.2.3" />
     <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.2.3" />

@@ -6,7 +6,7 @@ namespace VendManager.BlazorUI.Contracts
     public interface IMachineService
     {
         Task<Response<Guid>> CreateMachine(MachineVM machine);
-        Task<Response<List<MachineVM>>> GetMachines();
+        Task<List<MachineVM>> GetMachines();
         Task<Response<MachineVM>> GetMachine(long id);
         Task<Response<Guid>> UpdateMachine(long id , MachineVM machine);
         Task<Response<Guid>> DeleteMachine(long id);
