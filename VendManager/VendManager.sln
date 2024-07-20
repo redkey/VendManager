@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.BlazorUI", "Ven
 		{B20A6459-D3D7-4B7A-8693-C9B98CE32EB2} = {B20A6459-D3D7-4B7A-8693-C9B98CE32EB2}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendManager.Identity", "VendManager.Identity\VendManager.Identity.csproj", "{BAF80E2E-E3FB-4486-87B4-C8D4189058A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendManager.Identity", "VendManager.Identity\VendManager.Identity.csproj", "{BAF80E2E-E3FB-4486-87B4-C8D4189058A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

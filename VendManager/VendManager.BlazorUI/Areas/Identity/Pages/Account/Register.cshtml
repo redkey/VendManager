@@ -1,0 +1,73 @@
+﻿@page
+@model RouterManagerServer.UI.Areas.Identity.Pages.Account.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="/images/redkey.jpg" alt="Logo" class="mb-3" style="width: 150px;" />
+                    </div>
+                    <hr />
+                    <div class="text-center mb-4">
+                        <h4 class="d-inline-block font-weight-bold">Sign Up</h4>
+                        <a href="/forgot-password" class="float-end">Forgot Password?</a>
+                    </div>
+                    <form  id="account" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <input asp-for="Input.Email" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Input.CustomerName" class="form-label">Customer Name</label>
+                            <input asp-for="Input.CustomerName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <input asp-for="Input.Password"class="form-control"  />
+                        </div>
+                       
+                        <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                        </div>
+                        <a href="/identity/account/login" class="btn btn-secondary w-100">Back Log In</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .or-separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+        .or-separator::before, .or-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .or-separator::before {
+            margin-right: .25em;
+        }
+
+        .or-separator::after {
+            margin-left: .25em;
+        }
+
+    label {
+        color: black;
+    }
+</style>

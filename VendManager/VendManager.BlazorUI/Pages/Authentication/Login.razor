@@ -1,0 +1,139 @@
+﻿@page "/login"
+
+@* Include Bootstrap 5 *@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .login-logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 120px;
+    }
+
+    .forgot-password {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #0d6efd;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .new-account-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .new-account-section::before,
+        .new-account-section::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid #ddd;
+            margin: 0 10px;
+        }
+
+        .new-account-section p {
+            margin: 0;
+        }
+
+        .new-account-section button {
+            display: block;
+            margin: 10px auto 0;
+        }
+</style>
+
+<div class="login-container">
+    <div class="card login-card shadow-sm">
+        <img src="./images/redkey.jpg" alt="Logo" class="login-logo" />
+        <hr />
+        <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Username" @bind="username" />
+                </div>
+                <div class="mb-3 password-container">
+                    <input type="password" id="passwordField" class="form-control" placeholder="Password" @bind="password" />
+                    <i class="bi bi-eye password-toggle" onclick="togglePasswordVisibility()"></i>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="keepMeLoggedIn" />
+                    <label class="form-check-label" for="keepMeLoggedIn">Keep me logged in</label>
+                </div>
+                <button type="button" class="btn btn-primary w-100" @onclick="SignIn">Sign In</button>
+                <div class="new-account-section">
+                    <span></span>
+                    <p class="mb-1">New Account</p>
+                    <span></span>
+                </div>
+                <button type="button" class="btn btn-outline-primary w-100 mt-2" @onclick="CreateAccount">Create New Account</button>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string username;
+    private string password;
+
+    private void SignIn()
+    {
+        // Handle sign-in logic here
+    }
+
+    private void CreateAccount()
+    {
+        // Handle account creation logic here
+    }
+}
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById('passwordField');
+        const passwordToggle = document.querySelector('.password-toggle');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            passwordToggle.classList.remove('bi-eye');
+            passwordToggle.classList.add('bi-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            passwordToggle.classList.remove('bi-eye-slash');
+            passwordToggle.classList.add('bi-eye');
+        }
+    }
+</script>
