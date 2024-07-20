@@ -1,6 +1,8 @@
+using Blazored.LocalStorage;
 using System.Reflection;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
+using VendManager.BlazorUI.Providers;
 using VendManager.BlazorUI.Services;
 using VendManager.BlazorUI.Services.Base;
 
@@ -16,6 +18,12 @@ builder.Services.AddDevExpressBlazor(options => {
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.WebHost.UseWebRoot("wwwroot");
 builder.WebHost.UseStaticWebAssets();
+
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<ApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+
 
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
 builder.Services.AddScoped<IMachineService, MachineService>();

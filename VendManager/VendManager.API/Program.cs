@@ -3,6 +3,7 @@ using VendManager.API.Middleware;
 using VendManager.Application;
 using VendManager.Infrastructure;
 using VendManager.Persistence;
+using VendManager.Identity;
 namespace VendManager.API
 {
     public class Program
@@ -14,6 +15,7 @@ namespace VendManager.API
             // Add services to the container.
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddPersistenceServices(builder.Configuration);
+            builder.Services.AddIdentityServices(builder.Configuration);
             builder.Services.AddApplicationServices();
 
             builder.Services.AddControllers();
@@ -45,6 +47,8 @@ namespace VendManager.API
             app.UseHttpsRedirection();
 
             app.UseCors("AllowAll");
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

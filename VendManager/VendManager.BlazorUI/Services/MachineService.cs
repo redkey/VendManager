@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
+using DevExpress.PivotGrid.Criteria;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Models;
 using VendManager.BlazorUI.Services.Base;
@@ -9,10 +11,9 @@ namespace VendManager.BlazorUI.Services
     {
         
         private readonly IMapper _mapper;
-
-        public MachineService(IClient client , IMapper mapper) : base(client)
+        public MachineService(IClient client, IMapper mapper, ILocalStorageService localStorage) : base(client, localStorage)
         {
-           
+
             _mapper = mapper;
         }
 
@@ -33,6 +34,7 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<List<MachineVM>> GetMachines()
         {
+            await AddBearerToken();
             var machines = await _client.MachineAllAsync();
             return _mapper.Map<List<MachineVM>>(machines);
 

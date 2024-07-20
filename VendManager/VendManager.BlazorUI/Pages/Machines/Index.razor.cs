@@ -25,5 +25,7 @@ namespace VendManager.BlazorUI.Pages.Machines
             Machines = await MachineService.GetMachines();
           
         }
+
+    
     }
 }
