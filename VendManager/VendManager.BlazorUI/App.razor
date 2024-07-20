@@ -1,7 +1,25 @@
-﻿@DxResourceManager.RegisterScripts()
-<Router AppAssembly="@typeof(App).Assembly">
+﻿@using VendManager.BlazorUI.Pages
+@DxResourceManager.RegisterScripts()
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+            <NotAuthorized>
+                @if(context.User.Identity.IsAuthenticated)
+                {
+                    <PageTitle>Not authorized</PageTitle>
+                    <LayoutView>
+                        <p role="alert">Sorry, you're not authorized to access this page.</p>
+                    </LayoutView>
+                }
+                else
+                {
+                    <RedirectToLogin/>
+                })
+                
+            </NotAuthorized>
+          
+        </AuthorizeRouteView>
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
@@ -10,3 +28,4 @@
         </LayoutView>
     </NotFound>
 </Router>
+</CascadingAuthenticationState>

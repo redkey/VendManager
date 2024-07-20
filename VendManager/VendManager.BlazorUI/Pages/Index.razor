@@ -1,4 +1,8 @@
 ﻿@page "/"
+@using VendManager.BlazorUI.Contracts
+@using VendManager.BlazorUI.Providers
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IAuthenticationService AuthenticationService
 
 <PageTitle>Welcome</PageTitle>
 <div class="welcome">
@@ -35,3 +39,9 @@
         </Items>
     </DxGridLayout>
 </div>
+@code{
+    protected async override Task OnInitializedAsync()
+    {
+       //await ((ApiAuthenticationStateProvider)AuthenticationStateProvider).GetAuthenticationStateAsync();
+    }
+}

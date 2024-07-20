@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using System.Reflection;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
@@ -21,7 +22,7 @@ builder.WebHost.UseStaticWebAssets();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<ApiAuthenticationStateProvider, ApiAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 
