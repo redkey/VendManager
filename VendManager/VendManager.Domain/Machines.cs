@@ -10,6 +10,7 @@ namespace VendManager.Domain
         public string Location { get; set; }
         public string Notes { get; set; }
         public bool Enabled { get; set; }
+        public List<SensorBar>? SensorBars { get; set; }    
 
     }
 }

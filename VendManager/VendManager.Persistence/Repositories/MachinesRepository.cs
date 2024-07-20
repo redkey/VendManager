@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,16 @@ namespace VendManager.Persistence.Repositories
     {
         public MachinesRepository(VendorManagerDbContext context) : base(context)
         {
+        }
+
+        public async Task<List<Machines>> GetAllMachinesWithSensorDetails()
+        {
+
+            var machines = await _context.Machines
+                .Include(x => x.SensorBars)
+                .ToListAsync();
+
+            return machines;
         }
     }
 }

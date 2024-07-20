@@ -25,6 +25,13 @@ namespace VendManager.Persistence
             modelBuilder.Entity<MachineGroups>().ToTable("MachineGroups");
             modelBuilder.Entity<SensorBar>().ToTable("SensorBar");
             modelBuilder.Entity<SensorValueHistory>().ToTable("SensorValueHistory");
+
+            // Configure the foreign key relationship
+            modelBuilder.Entity<SensorBar>()
+                .HasOne(sb => sb.Machine)
+                .WithMany(m => m.SensorBars)
+                .HasForeignKey(sb => sb.MachineID)
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }
