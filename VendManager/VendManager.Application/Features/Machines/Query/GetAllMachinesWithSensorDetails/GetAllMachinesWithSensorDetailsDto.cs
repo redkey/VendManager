@@ -15,7 +15,7 @@ namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSens
         public string Location { get; set; }
         public string Notes { get; set; }
         public bool Enabled { get; set; }
-        public List<SensorBarDto>? SensorBar { get; set; }
+        public SensorBarDto SensorBar { get; set; }
 
      
 

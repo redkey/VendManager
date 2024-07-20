@@ -9,6 +9,7 @@
         public string Location { get; set; }
         public string Notes { get; set; }
         public bool Enabled { get; set; }
+        public SensorBarViewModel SensorBars { get; set; }
 
     }
 }

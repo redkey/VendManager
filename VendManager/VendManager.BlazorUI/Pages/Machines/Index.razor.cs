@@ -22,7 +22,7 @@ namespace VendManager.BlazorUI.Pages.Machines
 
         protected override async Task OnInitializedAsync()
         {
-            Machines = await MachineService.GetMachines();
+            Machines = await MachineService.GetAllMachinesWithSensorDetails();
           
         }
 

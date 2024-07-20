@@ -29,8 +29,8 @@ namespace VendManager.Persistence
             // Configure the foreign key relationship
             modelBuilder.Entity<SensorBar>()
                 .HasOne(sb => sb.Machine)
-                .WithMany(m => m.SensorBars)
-                .HasForeignKey(sb => sb.MachineID)
+                .WithOne(m => m.SensorBars)
+                
                 .OnDelete(DeleteBehavior.Cascade); 
         }
     }

@@ -27,6 +27,13 @@ namespace VendManager.BlazorUI.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<MachineVM>> GetAllMachinesWithSensorDetails()
+        {
+            await AddBearerToken();
+            var machines = await _client.GetAllMachinesWithSensorDetailsAsync();
+            return _mapper.Map<List<MachineVM>>(machines);
+        }
+
         public Task<Response<MachineVM>> GetMachine(long id)
         {
             throw new NotImplementedException();
