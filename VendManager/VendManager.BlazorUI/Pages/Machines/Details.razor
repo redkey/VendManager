@@ -1,0 +1,61 @@
+﻿@page "/machines/details/{MachineId:long}"
+@using VendManager.BlazorUI.Contracts
+@using VendManager.BlazorUI.Services.Base
+@inject IMachineService MachineService
+
+<h3>Machine Details</h3>
+
+<DxLoadingPanel Visible="@isLoading" />
+
+<DxGrid Data="Sensors"
+        ShowFilterRow="true">
+    <Columns>
+        <DxGridDataColumn FieldName="ChuteNumber" />
+        <DxGridDataColumn FieldName="CurrentValue" />
+        <DxGridDataColumn FieldName="ThresholdValue" />
+        <DxGridDataColumn FieldName="LastUpdatedDateTime" />
+        <DxGridDataColumn Caption="Chute State">
+            <CellDisplayTemplate>
+                @GetChuteStateIcon((SensorDto)context.DataItem)
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
+    </Columns>
+</DxGrid>
+
+@code {
+    [Parameter]
+    public long MachineId { get; set; }
+
+    private bool isLoading = true;
+
+    public List<SensorDto> Sensors { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Sensors = await MachineService.GetMachineChuteDetails(MachineId);
+        isLoading = false; // Set loading to false after data retrieval
+    }
+
+    private MarkupString GetChuteStateIcon(SensorDto sensor)
+    {
+        string iconHtml;
+
+        if (sensor.LastUpdatedDateTime.HasValue &&
+            (DateTime.UtcNow - sensor.LastUpdatedDateTime.Value).TotalHours > 24)
+        {
+            iconHtml = "<i class='fas fa-circle' style='color: grey;'></i> ";
+        }
+        else if (sensor.CurrentValue.HasValue && sensor.CurrentValue.Value > sensor.ThresholdValue)
+        {
+            iconHtml = "<i class='fas fa-circle' style='color: green;'></i> ";
+        }
+        else
+        {
+            iconHtml = "<i class='fas fa-circle' style='color: red;'></i> ";
+        }
+
+        return new MarkupString(iconHtml);
+    }
+}
+
+

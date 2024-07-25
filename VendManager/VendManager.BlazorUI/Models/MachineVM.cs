@@ -9,7 +9,8 @@
         public string Location { get; set; }
         public string Notes { get; set; }
         public bool Enabled { get; set; }
-        public SensorBarViewModel SensorBars { get; set; }
+        public DateTime? LastCommunicationDateTimeUTC { get; set; }
+        // public ICollection<SensorBarViewModel> SensorBars { get; set; }
 
     }
 }

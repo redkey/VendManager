@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendManager.Application.Models.Identity;
 
 namespace VendManager.Identity.Models
 {
@@ -11,5 +12,9 @@ namespace VendManager.Identity.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public bool Enabled { get; set; } = true;
+
+        public virtual UserDetails UserDetails { get; set; } // Navigation property for one-to-one relationship
     }
 }

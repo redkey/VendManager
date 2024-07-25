@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using DevExpress.CodeParser;
 using Microsoft.AspNetCore.Components.Authorization;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Providers;
@@ -26,7 +25,7 @@ namespace VendManager.BlazorUI.Services
                 if (authenticationResponse.Token != string.Empty)
                 {
                     await _localStorage.SetItemAsync("token", authenticationResponse.Token);
-
+                    
                     // Set claims in Blazor and login state
                     await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedIn();
                     return true;
@@ -39,6 +38,12 @@ namespace VendManager.BlazorUI.Services
             }
 
         }
+
+        public Task AuthenticateAsync2(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Logout()
         {
             // remove claims in Blazor and invalidate login state

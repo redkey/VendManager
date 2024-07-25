@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails;
+using VendManager.Application.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,7 +11,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class MachineController : ControllerBase
     {
         private readonly IMediator _mediator;

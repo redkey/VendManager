@@ -200,6 +200,9 @@ namespace VendManager.Identity.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -258,16 +261,17 @@ namespace VendManager.Identity.Migrations
                         {
                             Id = "82aa9131-f8ed-4aa4-b997-92a8671ac502",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3dae7394-0018-4f07-a48d-540b87520cdb",
+                            ConcurrencyStamp = "4041b692-09f8-48e8-a004-d7c8d15b505b",
                             Email = "admin@vendmanager.co",
                             EmailConfirmed = true,
+                            Enabled = true,
                             FirstName = "System",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@VENDMANAGER.CO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKchgTtSqYsVqvZ5klWYy5ATKqnkBUsErBnAAMBmVyTjkt6gsma/4/yVQbVwYZ9cWA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKCfx4QL7gWi5bGB4AP3zekA9g4OUm+4mQSVehMxYmr2g8wtpLtX6pq4lYv/EhhSyQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9497016a-2780-4090-966e-bac4c23d4bd6",
+                            SecurityStamp = "0164c6e9-afee-4e68-8bc6-53bfcd900885",
                             TwoFactorEnabled = false,
                             UserName = "admin@vendmanager.co"
                         },
@@ -275,19 +279,58 @@ namespace VendManager.Identity.Migrations
                         {
                             Id = "82aa9131-f8ed-4aa4-b997-92a8671ac503",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ed6771b-8fbe-42b4-bb14-df69dba7d683",
+                            ConcurrencyStamp = "8a93eab1-397d-418a-a79a-8c70055d6948",
                             Email = "customer@vendmanager.co",
                             EmailConfirmed = true,
+                            Enabled = true,
                             FirstName = "System",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@VENDMANAGER.CO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJImdNFuiqEo1KPd7xTpN0/Ls+pyE7/iJD+WnVWPJcHGNm8T4vQsqd0nzNwthsO2mQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEVrwfiaBSJUkJwz/+Ql+tvoh6zGCdnv6WCz8hBQ/eEwuRO7zcnBAjvusivuzXff1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f7eaf75b-f415-4605-b1b0-7b1a8c3b808d",
+                            SecurityStamp = "20686f93-3fe4-406d-a5f2-d511616e5c9e",
                             TwoFactorEnabled = false,
                             UserName = "customer@vendmanager.co"
                         });
+                });
+
+            modelBuilder.Entity("VendManager.Identity.Models.UserDetails", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AspNetUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("EmailNotificationIntervalMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EmailNotificationLastProcessedAtDateTimeUTC")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EmailNotificationOnlyOutStockPeriodMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SMSNotificationIntervalMinutes")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SMSlNotificationLastProcessedAtDateTimeUTC")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SMSlNotificationOnlyOutStockPeriodMinutes")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId")
+                        .IsUnique();
+
+                    b.ToTable("UserDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -338,6 +381,23 @@ namespace VendManager.Identity.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VendManager.Identity.Models.UserDetails", b =>
+                {
+                    b.HasOne("VendManager.Identity.Models.ApplicationUser", "AspNetUser")
+                        .WithOne("UserDetails")
+                        .HasForeignKey("VendManager.Identity.Models.UserDetails", "AspNetUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AspNetUser");
+                });
+
+            modelBuilder.Entity("VendManager.Identity.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("UserDetails")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

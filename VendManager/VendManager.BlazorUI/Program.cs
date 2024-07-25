@@ -23,6 +23,8 @@ builder.WebHost.UseStaticWebAssets();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+builder.Services.AddScoped<RedirectService>();
+
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 

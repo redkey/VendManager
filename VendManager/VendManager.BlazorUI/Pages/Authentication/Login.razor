@@ -77,9 +77,13 @@
             display: block;
             margin: 10px auto 0;
         }
+
+    .spinner-border {
+        width: 1rem;
+        height: 1rem;
+        border-width: 0.2em;
+    }
 </style>
-
-
 
 <div class="login-container">
     <div class="card login-card shadow-sm">
@@ -105,7 +109,17 @@
                     <input type="checkbox" class="form-check-input" id="keepMeLoggedIn" />
                     <label class="form-check-label" for="keepMeLoggedIn">Keep me logged in</label>
                 </div>
-                <button type="button" class="btn btn-primary w-100" @onclick="SignIn">Sign In</button>
+                <button type="button" class="btn btn-primary w-100" @onclick="SignIn" disabled="@isSubmitting">
+                    @if (isSubmitting)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="visually-hidden">Loading...</span>
+                    }
+                    else
+                    {
+                        <span>Sign In</span>
+                    }
+                </button>
                 <div class="new-account-section">
                     <span></span>
                     <p class="mb-1">New Account</p>
@@ -118,29 +132,7 @@
     </div>
 </div>
 
-@code {
-    private string username;
-    private string password;
-    private string Message;
 
-    private async Task SignIn()
-    {
-        if (await AuthenticationService.AuthenticateAsync(username, password))
-        {
-            NavigationManager.NavigateTo("/");
-        }
-        else
-        {
-            Message = "Invalid username or password.";
-        }
-   
-    }
-
-    private void CreateAccount()
-    {
-        // Handle account creation logic here
-    }
-}
 
 <script>
     function togglePasswordVisibility() {

@@ -24,30 +24,23 @@
                 <Template>
                     <div @onclick="Collapse">
                         <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
-                            
-                                <Items>
-                                    <AuthorizeView>
-                                        <NotAuthorized>
-                                            <DxMenuItem NavigateUrl="/" Text="Home" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>
-                                        </NotAuthorized>
-                                        <Authorized>
-                                            <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
-                                            <DxMenuItem NavigateUrl="/machines" Text="@context.User?.Identity?.Name" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
-                                            <DxMenuItem NavigateUrl="/login" Text="Login" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
-                                    </Authorized>
-                                </AuthorizeView>
-                                </Items>
-                            
+                            <Items>
+                                <DxMenuItem NavigateUrl="/" Text="Home" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>      
+                                <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
+                            </Items>
                         </DxMenu>
                     </div>
                 </Template>
             </DxGridLayoutItem>
-         @*    <DxGridLayoutItem Area="footer" CssClass="footer">
+             <DxGridLayoutItem Area="footer" CssClass="footer">
                 <Template>
-                    <DxButton Text="Docs" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="footer-button" RenderStyle="@ButtonRenderStyle.Light" NavigateUrl="https://docs.devexpress.com/Blazor/400725/blazor-components" IconCssClass="icon docs-icon"></DxButton>
-                    <DxButton Text="Demos" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="footer-button" RenderStyle="@ButtonRenderStyle.Light" NavigateUrl="https://demos.devexpress.com/blazor/" IconCssClass="icon demos-icon"></DxButton>
+                    <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
+                        <Items>
+                            <DxMenuItem NavigateUrl="/" Text="Logout" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>
+                        </Items>
+                    </DxMenu>
                 </Template>
-            </DxGridLayoutItem> *@
+            </DxGridLayoutItem> 
         </Items>
     </DxGridLayout>
 </div>

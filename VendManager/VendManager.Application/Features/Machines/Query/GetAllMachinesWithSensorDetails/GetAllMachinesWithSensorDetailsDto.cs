@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendManager.Application.Models;
 using VendManager.Domain;
 
 namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails
@@ -15,7 +16,7 @@ namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSens
         public string Location { get; set; }
         public string Notes { get; set; }
         public bool Enabled { get; set; }
-        public SensorBarDto SensorBar { get; set; }
+        public ICollection<SensorBarDto> SensorBar { get; set; }
 
      
 

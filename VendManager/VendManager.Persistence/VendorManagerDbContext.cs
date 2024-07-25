@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using VendManager.Domain;
@@ -26,12 +27,32 @@ namespace VendManager.Persistence
             modelBuilder.Entity<SensorBar>().ToTable("SensorBar");
             modelBuilder.Entity<SensorValueHistory>().ToTable("SensorValueHistory");
 
-            // Configure the foreign key relationship
-            modelBuilder.Entity<SensorBar>()
-                .HasOne(sb => sb.Machine)
-                .WithOne(m => m.SensorBars)
-                
-                .OnDelete(DeleteBehavior.Cascade); 
+
+
+            // Configure SensorBar entity
+            modelBuilder.Entity<SensorBar>(entity =>
+            {
+                entity.ToTable("SensorBar");
+
+                // Configure properties
+                entity.Property(e => e.MacAddress).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.FirmwareVersion).HasMaxLength(50);
+
+                // Configure relationships
+                entity.HasOne(sb => sb.Machine)
+                   .WithMany(m => m.SensorBars)
+                   .HasForeignKey(sb => sb.MachineID)
+                   .OnDelete(DeleteBehavior.Restrict);
+            });
+
+
+            // Configure Sensor entity
+            modelBuilder.Entity<Sensor>()
+                .ToTable("Sensor")
+                .HasOne(s => s.SensorBar)
+                .WithMany(sb => sb.Sensors)
+                .HasForeignKey(s => s.SensorBarID);
+         
         }
     }
 }

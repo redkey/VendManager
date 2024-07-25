@@ -3,6 +3,8 @@
 
 <h3>Machines</h3>
 
+
+<DxLoadingPanel Visible="@isLoading" />
 <DxGrid Data="Machines"
     ShowFilterRow="true"> 
     <Columns>
@@ -11,7 +13,20 @@
         <DxGridDataColumn FieldName="Location" />
         <DxGridDataColumn FieldName="Notes" Width="280px" />
         <DxGridDataColumn FieldName="Enabled" />
-        <DxGridDataColumn FieldName="SensorBars.LastCommunicationDateTimeUTC" Caption="Last Communication Date" />
+        <DxGridDataColumn FieldName="LastCommunicationDateTimeUTC" Caption="Last Communication Date" />
+        <DxGridDataColumn Caption="Actions" Width="80px">
+            <CellDisplayTemplate>
+                <div style="width: 100%; text-align: center;">
+                    <a href="" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((MachineVM)context.DataItem).ID)" title="See More">
+                        <i class="fas fa-info"></i>
+                    </a>
+                </div>
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
+            
     </Columns>
    
 </DxGrid>

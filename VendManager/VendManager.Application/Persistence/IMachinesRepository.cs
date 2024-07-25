@@ -4,7 +4,7 @@ namespace VendManager.Application.Persistence
 {
     public interface IMachinesRepository : IGenericRepository<Machines>
     {
-        Task<List<Machines>> GetAllMachinesWithSensorDetails();
+        Task<List<Machines>> GetAllMachinesWithSensorBarDetails();
     }
 
 }

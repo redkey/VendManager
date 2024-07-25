@@ -15,7 +15,7 @@ namespace VendManager.Persistence.Repositories
         {
         }
 
-        public async Task<List<Machines>> GetAllMachinesWithSensorDetails()
+        public async Task<List<Machines>> GetAllMachinesWithSensorBarDetails()
         {
 
             var machines = await _context.Machines
@@ -24,5 +24,17 @@ namespace VendManager.Persistence.Repositories
 
             return machines;
         }
+
+        public async Task<List<Machines>> GetAllMachinesWithSensorDetails()
+        {
+            var machines = await _context.Machines
+                .Include(x => x.SensorBars)
+            
+                .ToListAsync();
+
+            return machines;
+        }
+
+
     }
 }

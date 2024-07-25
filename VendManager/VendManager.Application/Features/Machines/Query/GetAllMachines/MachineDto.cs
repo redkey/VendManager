@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VendManager.Application.Features.Machines.Query.GetAllMachines
 {
-    public class MachineDto
+    public class MachineDto2
     {
         public int ID { get; set; }
         public string Name { get; set; }

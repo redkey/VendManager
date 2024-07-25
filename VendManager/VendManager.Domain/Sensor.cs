@@ -4,8 +4,9 @@ namespace VendManager.Domain
 {
     public class Sensor : BaseEntity
     {
-   
-        public int SensorBarID { get; set; }
+
+        public long SensorBarID { get; set; }
+        public SensorBar SensorBar { get; set; }
         public int ThresholdValue { get; set; }
         public int? CurrentValue { get; set; }
         public DateTime? LastUpdatedDateTime { get; set; }
@@ -13,4 +14,7 @@ namespace VendManager.Domain
         public bool Enabled { get; set; }
 
     }
+
+   
+
 }

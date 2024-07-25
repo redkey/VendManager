@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Contracts\Email\" />
+    <Folder Include="Features\Sensors\Command\" />
   </ItemGroup>
 
   <ItemGroup>

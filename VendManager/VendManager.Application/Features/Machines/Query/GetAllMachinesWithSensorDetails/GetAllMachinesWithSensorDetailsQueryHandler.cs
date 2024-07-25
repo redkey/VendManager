@@ -1,10 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VendManager.Application.Persistence;
 
 namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails
@@ -22,7 +17,7 @@ namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSens
 
         public async Task<List<GetAllMachinesWithSensorDetailsDto>> Handle(GetAllMachinesWithSensorDetailsQuery request, CancellationToken cancellationToken)
         {
-             var machines = await _machineRepository.GetAllMachinesWithSensorDetails();
+             var machines = await _machineRepository.GetAllMachinesWithSensorBarDetails();
 
              var machineWithDetailsDto =  _mapper.Map<List<GetAllMachinesWithSensorDetailsDto>>(machines); 
             return machineWithDetailsDto;

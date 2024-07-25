@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using VendManager.Application.Models;
 
 namespace VendManager.Application.Features.Machines.Query.GetAllMachines
 {

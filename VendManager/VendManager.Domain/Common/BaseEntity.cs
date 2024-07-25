@@ -9,8 +9,7 @@ namespace VendManager.Domain.Common
     public abstract class BaseEntity
     {
         public long ID { get; set; }
-   //     public DateTime? CreatedDateTimeUTC { get; set; }
-    //    public DateTime? ModifiedDateTimeUTC { get; set; }
+
     }
 }
         
