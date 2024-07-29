@@ -1,17 +1,20 @@
 ﻿using Blazored.LocalStorage;
 using DevExpress.CodeParser;
 using System.Net.Http.Headers;
+using VendManager.BlazorUI.Services.HttpContext;
 
 namespace VendManager.BlazorUI.Services.Base
 {
     public class BaseHttpService
     {
         protected IClient _client;
-        protected readonly ILocalStorageService _localStorage;
-        public BaseHttpService(IClient client, ILocalStorageService localStorage)
+       // protected readonly ILocalStorageService _localStorage;
+        private readonly TokenPersistenceService _tokenService;
+        public BaseHttpService(IClient client, TokenPersistenceService tokenService)
         {
             _client = client;
-            _localStorage = localStorage;
+         //   _localStorage = localStorage;
+            _tokenService = tokenService;
         }
 
         protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
@@ -32,28 +35,37 @@ namespace VendManager.BlazorUI.Services.Base
 
         protected async Task AddBearerToken()
         {
-
-            var tokenExists = await _localStorage.ContainKeyAsync("token");
-
-            if (tokenExists)
+            var token = await _tokenService.GetTokenAsync();
+            if (!string.IsNullOrEmpty(token))
             {
-                var token = await _localStorage.GetItemAsync<string>("token");
-
-                try
-                {
-                    _client.HttpClient.DefaultRequestHeaders.Authorization =
-             new AuthenticationHeaderValue("Bearer", token);
-                
-                }
-                catch (Exception ex)
-                {
-
-                    throw;
-                }
-           
+                _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             }
-
         }
+
+        //protected async Task AddBearerToken()
+        //{
+
+        //    var tokenExists = await _localStorage.ContainKeyAsync("token");
+
+        //    if (tokenExists)
+        //    {
+        //        var token = await _localStorage.GetItemAsync<string>("token");
+
+        //        try
+        //        {
+        //            _client.HttpClient.DefaultRequestHeaders.Authorization =
+        //     new AuthenticationHeaderValue("Bearer", token);
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            throw;
+        //        }
+
+        //    }
+
+        //}
 
     }
 }

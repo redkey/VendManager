@@ -11,7 +11,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize]
+    [Authorize]
     public class MachineController : ControllerBase
     {
         private readonly IMediator _mediator;

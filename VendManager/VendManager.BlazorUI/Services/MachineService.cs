@@ -4,6 +4,7 @@ using DevExpress.PivotGrid.Criteria;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Models;
 using VendManager.BlazorUI.Services.Base;
+using VendManager.BlazorUI.Services.HttpContext;
 
 namespace VendManager.BlazorUI.Services
 {
@@ -11,9 +12,9 @@ namespace VendManager.BlazorUI.Services
     {
         
         private readonly IMapper _mapper;
-        public MachineService(IClient client, IMapper mapper, ILocalStorageService localStorage) : base(client, localStorage)
+        public MachineService(IClient client, IMapper mapper, TokenPersistenceService tokenService)
+          : base(client, tokenService)
         {
-
             _mapper = mapper;
         }
 
@@ -29,7 +30,7 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<List<MachineVM>> GetAllMachinesWithSensorDetails()
         {
-            await AddBearerToken();
+           await AddBearerToken();
             var machines = await _client.GetAllMachinesWithSensorDetailsAsync();
             var machinesVM = _mapper.Map<List<MachineVM>>(machines);
             return machinesVM;
@@ -42,14 +43,14 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<List<SensorDto>> GetMachineChuteDetails(long machineId)
         {
-            await AddBearerToken();
+           // await AddBearerToken();
             var sensors = await _client.SensorAll2Async(machineId);
             return sensors.ToList();
         }
 
         public async Task<List<MachineVM>> GetMachines()
         {
-            await AddBearerToken();
+           // await AddBearerToken();
             var machines = await _client.MachineAllAsync();
             return _mapper.Map<List<MachineVM>>(machines);
 

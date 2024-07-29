@@ -1,0 +1,21 @@
+﻿@page "/Identity/Account/StoreToken"
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "Token")]
+    public string Token { get; set; }
+
+    private bool _isTokenStored = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_isTokenStored && !string.IsNullOrEmpty(Token))
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", Token);
+            _isTokenStored = true;
+            Navigation.NavigateTo("/");
+        }
+    }
+}

@@ -27,7 +27,7 @@ namespace VendManager.Identity
 
             services.AddDbContext<VendManagerIdentityDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("VendManagerIdentityConnectionString"));
+                options.UseSqlServer(configuration.GetConnectionString("VendManagerIdentityConnectionString2"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
