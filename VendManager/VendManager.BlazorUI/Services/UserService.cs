@@ -15,7 +15,6 @@ namespace VendManager.BlazorUI.Services
         {
             var claimsPrincipal = _httpContextAccessor.HttpContext?.User;
             var role = claimsPrincipal.Identities.FirstOrDefault().Claims.FirstOrDefault(c => c.Type == "Role")?.Value;
-            //var role = claimsPrincipal?.FindFirst(ClaimTypes.Role)?.Value;
             return role;
         }
 

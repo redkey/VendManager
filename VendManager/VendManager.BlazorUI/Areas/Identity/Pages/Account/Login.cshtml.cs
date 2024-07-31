@@ -75,7 +75,7 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
                         new Claim("Role" , response.Roles.First())
                     };
 
-            
+                
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
