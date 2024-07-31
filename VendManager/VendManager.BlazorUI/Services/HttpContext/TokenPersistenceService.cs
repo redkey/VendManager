@@ -27,7 +27,7 @@ namespace VendManager.BlazorUI.Services.HttpContext
                 Console.WriteLine(ex.Message);
                 return null;
             }
-          //  return await _jsRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+
         }
 
         public async Task RemoveTokenAsync()
