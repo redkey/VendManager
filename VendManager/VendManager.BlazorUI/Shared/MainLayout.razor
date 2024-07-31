@@ -46,45 +46,6 @@
 
     
 
-    // private bool _isAuthenticated;
-
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-    //     var user = authState.User;
-    //     _isAuthenticated = user.Identity.IsAuthenticated;
-    // }
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     if (firstRender && !_isAuthenticated)
-    //     {
-    //         NavigationManager.NavigateTo("/login");
-    //     }
-    // }
-
-    // [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
-
-    // protected async override Task OnInitializedAsync()
-    // {
-    //     base.OnInitialized();
-    //     var user = (await AuthStat).User;
-    //     if (!user.Identity.IsAuthenticated)
-    //     {
-    //         NavigationManager.NavigateTo($"identity/account/login");
-    //     }
-    // }
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     if (firstRender)
-    //     {
-    //         var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
-    //         var authState = await customAuthStateProvider.GetAuthenticationStateAsync();
-    //         customAuthStateProvider.UpdateAuthenticationState(authState);
-    //     }
-    // }
-
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
 
     protected async override Task OnInitializedAsync()

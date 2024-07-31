@@ -1,4 +1,7 @@
-﻿<div id="sidebar" class="@(IsExpanded ? "expanded": "")">
+﻿@using VendManager.BlazorUI.Services
+@inject IUserService UserService
+
+<div id="sidebar" class="@(IsExpanded ? "expanded": "")">
     <DxGridLayout CssClass="page-layout" RowSpacing="1.5rem">
         <Rows>
             <DxGridLayoutRow Areas="header menu-button" Height="auto"></DxGridLayoutRow>
@@ -25,8 +28,13 @@
                     <div @onclick="Collapse">
                         <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
                             <Items>
-                                <DxMenuItem NavigateUrl="/" Text="Home" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>      
-                                <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
+                                <DxMenuItem NavigateUrl="/" Text="@UserService.GetUserName()" CssClass="menu-item" IconCssClass="fas fa-house-user"></DxMenuItem>
+                                <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="fas fa-server"></DxMenuItem>
+                                @if(UserService.GetRole() == "Admin")
+                                {
+                                    <DxMenuItem NavigateUrl="/machines" Text="User Management" CssClass="menu-item" IconCssClass="fas fa-users"></DxMenuItem>
+                                }
+                                
                             </Items>
                         </DxMenu>
                     </div>
@@ -36,7 +44,7 @@
                 <Template>
                     <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
                         <Items>
-                            <DxMenuItem NavigateUrl="/Identity/Account/Logout" Text="Logout" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>
+                            <DxMenuItem NavigateUrl="/Identity/Account/Logout" Text="Logout" CssClass="menu-item" IconCssClass="fa fa-sign-out-alt"></DxMenuItem>
                         </Items>
                     </DxMenu>
                 </Template>
@@ -46,7 +54,11 @@
 </div>
 
 @code {
+
+    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
     public bool IsExpanded { get; set; } = false;
+
+  
 
     void TriggerIsExpanded() {
         IsExpanded = !IsExpanded;

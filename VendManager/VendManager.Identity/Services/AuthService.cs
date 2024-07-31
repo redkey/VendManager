@@ -43,13 +43,18 @@ namespace VendManager.Identity.Services
                 throw new BadRequestException("Invalid credentials");
             }
 
+            // Retrieve the roles
+            var roles = await _userManager.GetRolesAsync(user);
+
             JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
 
             var response = new AuthResponse
             {
                 ID = user.Id,
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Email = user.Email
+                Email = user.Email,
+                UserName = user.Email,
+                Roles = roles.ToList()
             };
 
             return response;

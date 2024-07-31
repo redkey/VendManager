@@ -30,14 +30,14 @@ builder.Services.AddAuthorizationCore();
 
 // Register CustomAuthenticationStateProvider
 //builder.Services.AddScoped<CustomAuthenticationStateProvider>();
-builder.Services.AddSingleton<CustomAuthenticationService>();
+//builder.Services.AddSingleton<CustomAuthenticationService>();
 
 // Add custom authentication state provider
 //builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
 
 // Add protected session storage
-builder.Services.AddScoped<ProtectedSessionStorage>();
+//builder.Services.AddScoped<ProtectedSessionStorage>();
 
 //builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 //builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -46,8 +46,8 @@ builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
 // Register the HTTP client and use the custom handler
-builder.Services.AddHttpClient("ApiClient")
-    .AddHttpMessageHandler<AuthHttpClientHandler>();
+//builder.Services.AddHttpClient("ApiClient")
+  //  .AddHttpMessageHandler<AuthHttpClientHandler>();
 
 builder.Services.AddScoped<TokenPersistenceService>();
 
@@ -62,8 +62,10 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddHttpClient();
+//builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
 builder.Services.AddScoped<IMachineService, MachineService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

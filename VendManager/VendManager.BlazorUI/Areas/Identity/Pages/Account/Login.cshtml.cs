@@ -59,7 +59,7 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
             {
                 var loginRequest = new AuthRequest{ Email = Input.Email, Password = Input.Password };
                 var response = await _client.LoginAsync(loginRequest);
-            //    var response = await _httpClient.PostAsJsonAsync("https://localhost:7121/api/Auth/login", loginRequest);
+
 
                 if (response.Token != null)
                 {
@@ -71,8 +71,11 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
                     var claims = new[]
                     {
                         new Claim(ClaimTypes.Name, Input.Email),
-                        new Claim("JWT", response.Token)
+                        new Claim("JWT", response.Token),
+                        new Claim("Role" , response.Roles.First())
                     };
+
+            
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
