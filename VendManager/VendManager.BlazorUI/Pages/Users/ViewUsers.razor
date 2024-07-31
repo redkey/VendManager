@@ -2,3 +2,13 @@
 <h3>ViewUsers</h3>
 
 
+<DxLoadingPanel Visible="@isLoading" />
+<DxGrid Data="Users"
+        ShowFilterRow="true">
+    <Columns>
+        <DxGridDataColumn FieldName="Email" />
+        <DxGridDataColumn FieldName="FirstName" />
+        <DxGridDataColumn FieldName="LastName" />
+    </Columns>
+
+</DxGrid>

@@ -10,10 +10,12 @@ namespace VendManager.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IUserService _userService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUserService userService)
         {
             _authService = authService;
+            _userService = userService;
         }
 
 
@@ -31,6 +33,14 @@ namespace VendManager.API.Controllers
         {
             var response = await _authService.Register(request);
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("users")]
+        public async Task<ActionResult<List<User>>> GetUsers()
+        {
+            var users = await _userService.GetUsers();
+            return Ok(users);
         }
     }
 

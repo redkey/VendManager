@@ -12,7 +12,7 @@ namespace VendManager.Persistence
         {
             services.AddDbContext<VendorManagerDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("VendManagerDatabaseConnection2"));
+                options.UseSqlServer(configuration.GetConnectionString("VendManagerDatabaseConnection"));
             });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

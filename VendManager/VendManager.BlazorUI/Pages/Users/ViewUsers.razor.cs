@@ -1,41 +1,41 @@
+using Microsoft.AspNetCore.Components;
+using VendManager.BlazorUI.Contracts;
+using VendManager.BlazorUI.Models;
+using VendManager.BlazorUI.Services.Base;
+
 namespace VendManager.BlazorUI.Pages.Users
 {
     public partial class ViewUsers
     {
-        private string username;
-        private string password;
-        private string Message;
-        private bool isSubmitting = false;
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
-        private async Task SignIn()
+        [Inject]
+        public IClient Client { get; set; }
+
+        public List<User> Users { get; set; }
+
+        private bool isLoading = true;
+
+        public string Message { get; set; } = string.Empty;
+        protected void CreateMachine()
         {
-            isSubmitting = true;
-            StateHasChanged();
-            try
+            NavigationManager.NavigateTo("/machines/create");
+        }
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
             {
-                if (true)
-                {
-                    NavigationManager.NavigateTo("/");
-                }
-                else
-                {
-                    Message = "Invalid username or password.";
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                isSubmitting = false;
-                StateHasChanged();
+                var users = await Client.UsersAsync();
+                Users = users.ToList();
+                isLoading = false; // Set loading to false after data retrieval
+                StateHasChanged(); // Notify the component to re-render
             }
         }
-
-        private void CreateAccount()
+        protected void NavigateToDetails(long machineId)
         {
-            // Handle account creation logic here
+            NavigationManager.NavigateTo($"/machines/details/{machineId}");
         }
+
     }
 }
