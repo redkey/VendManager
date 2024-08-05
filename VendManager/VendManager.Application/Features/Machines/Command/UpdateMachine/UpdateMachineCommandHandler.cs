@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendManager.Application.Exceptions;
+using VendManager.Application.Features.Machines.Command.CreateMachine;
 using VendManager.Application.Persistence;
 
 namespace VendManager.Application.Features.Machines.Command.UpdateMachine
@@ -24,7 +26,11 @@ namespace VendManager.Application.Features.Machines.Command.UpdateMachine
         public async Task<Unit> Handle(UpdateMachineCommand request, CancellationToken cancellationToken)
         {
             //Validate Incoming Data
+            var validator = new UpdateMachineValidator();
+            var validationResult = await validator.ValidateAsync(request);
 
+            if (validationResult.Errors.Count > 0)
+                throw new BadRequestException("Invalid Machine", validationResult);
 
             //Convert to Domain Entities
             var machine = _mapper.Map<Domain.Machines>(request);

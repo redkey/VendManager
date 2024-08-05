@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails;
+using VendManager.Application.Features.Machines.Query.GetMachineDetails;
 using VendManager.Application.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -38,6 +39,15 @@ namespace VendManager.API.Controllers
             return machines;
         }
 
-        
+        [HttpGet]
+        [Route("GetMachineDetails")]
+        public async Task<MachineDetailDto> Get(long machineId)
+        {
+            var machines = await _mediator.Send(new GetMachineDetailQuery(machineId));
+
+            return machines;
+        }
+
+
     }
 }

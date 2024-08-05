@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace VendManager.Application.Features.Machines.Query.GetMachineDetails
 {
-    public record class GetMachineDetailQuery(int id) : IRequest<MachineDetailDto>;
+    public record class GetMachineDetailQuery(long id) : IRequest<MachineDetailDto>;
     
 }

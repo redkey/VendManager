@@ -36,14 +36,17 @@ namespace VendManager.BlazorUI.Services
             return machinesVM;
         }
 
-        public Task<Response<MachineVM>> GetMachine(long id)
+        public async Task<MachineDetailDto> GetMachine(long id)
         {
-            throw new NotImplementedException();
+           await AddBearerToken();
+           var machine = await _client.GetMachineDetailsAsync(id);
+            return machine;
+           // throw new NotImplementedException();
         }
 
         public async Task<List<SensorDto>> GetMachineChuteDetails(long machineId)
         {
-           // await AddBearerToken();
+            await AddBearerToken();
            // var sensors = await _client.SensorAll2Async(machineId);
             var sensors = await _client.Sensor2Async(machineId);
             return sensors.ToList();

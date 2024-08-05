@@ -32,7 +32,7 @@
                                 <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="fas fa-server "></DxMenuItem>
                                 @if (UserService.GetRole() == "Admin")
                                 {
-                                    <DxMenuItem NavigateUrl="/machines" Text="User Management" CssClass="menu-item" IconCssClass="fas fa-user-cog">
+                                    <DxMenuItem NavigateUrl="" Text="User Management" CssClass="menu-item" IconCssClass="fas fa-user-cog">
                                         <Items>
                                             <DxMenuItem NavigateUrl="/addadmin" Text="Add Admin" IconCssClass="fas fa-user-plus" />
                                             <DxMenuItem NavigateUrl="/activateuser" Text="Activate User" IconCssClass="fas fa-user-check" />

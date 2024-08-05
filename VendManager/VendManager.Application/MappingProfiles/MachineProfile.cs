@@ -2,6 +2,7 @@
 using System.Reflection.PortableExecutable;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails;
+using VendManager.Application.Features.Machines.Query.GetMachineDetails;
 using VendManager.Application.Models;
 using VendManager.Domain;
 
@@ -24,7 +25,7 @@ namespace VendManager.Application.MappingProfiles
 
             CreateMap<Sensor, SensorDto>();
 
-            //CreateMap<Machines, MachineDto>().ReverseMap();
+            CreateMap<Machines, MachineDetailDto>().ReverseMap();
             CreateMap<Machines, GetAllMachinesWithSensorDetailsDto>()
             .ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.ID))
             .ForMember(dest => dest.SensorBar, opt => opt.MapFrom(src => src.SensorBars));

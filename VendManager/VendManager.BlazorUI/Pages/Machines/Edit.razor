@@ -1,0 +1,57 @@
+﻿@page "/machines/edit/{MachineId:long}"
+@using VendManager.BlazorUI.Contracts
+@using VendManager.BlazorUI.Models
+@using VendManager.BlazorUI.Services
+@using VendManager.BlazorUI.Services.Base
+@using DevExpress.Blazor
+@inject IMachineService MachineService
+@inject NavigationManager NavigationManager
+
+
+@code {
+    [Parameter]
+    public long MachineId { get; set; }
+
+    private MachineDetailDto machine = new MachineDetailDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        machine = await MachineService.GetMachine(MachineId);
+    }
+
+    private async Task Save()
+    {
+        // Uncomment this line to update the machine
+       // await MachineService.UpdateMachine(machine);
+        NavigationManager.NavigateTo("/machines");
+    }
+}
+
+<h3>Edit Machine</h3>
+
+<EditForm Model="@machine" OnValidSubmit="Save">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label>Name:</label>
+        <DxTextBox @bind-Text="machine.Name" />
+    </div>
+    <div>
+        <label>Serial Number:</label>
+        <DxTextBox @bind-Text="machine.SerialNumber" />
+    </div>
+    <div>
+        <label>Location:</label>
+        <DxTextBox @bind-Text="machine.Location" />
+    </div>
+    <div>
+        <label>Notes:</label>
+        <DxTextBox @bind-Text="machine.Notes" />
+    </div>
+    <div>
+        <label>Enabled:</label>
+        <DxCheckBox @bind-Checked="machine.Enabled" />
+    </div>
+    <button type="submit">Save</button>
+</EditForm>

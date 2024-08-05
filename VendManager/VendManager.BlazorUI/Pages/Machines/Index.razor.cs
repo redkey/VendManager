@@ -42,6 +42,11 @@ namespace VendManager.BlazorUI.Pages.Machines
             NavigationManager.NavigateTo($"/machines/details/{machineId}");
         }
 
+        private void NavigateToEdit(long machineId)
+        {
+            NavigationManager.NavigateTo($"/machines/edit/{machineId}");
+        }
+
 
     }
 }

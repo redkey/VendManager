@@ -1,5 +1,7 @@
 ﻿@page "/machines"
 @using VendManager.BlazorUI.Models
+@using VendManager.BlazorUI.Services
+@inject IUserService UserService
 
 <h3>Machines</h3>
 
@@ -17,9 +19,20 @@
         <DxGridDataColumn Caption="Actions" Width="80px">
             <CellDisplayTemplate>
                 <div style="width: 100%; text-align: center;">
-                    <a href="" title="Edit">
-                        <i class="fas fa-edit"></i>
-                    </a> |
+                   @*  @if (UserService.GetRole() == "Admin")
+                    {
+                        <a href="" title="Edit">
+                            <i class="fas fa-edit"></i>|
+                        </a>
+                    } *@
+
+                    @if (UserService.GetRole() == "Admin")
+                    {
+                        <a href="" @onclick:preventDefault @onclick="() => NavigateToEdit(((MachineVM)context.DataItem).ID)" title="Edit">
+                            <i class="fas fa-edit"></i>|
+                        </a>
+                    }
+                    
                     <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((MachineVM)context.DataItem).ID)" title="See More">
                         <i class="fas fa-info"></i>
                     </a>
