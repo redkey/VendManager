@@ -19,12 +19,6 @@
         <DxGridDataColumn Caption="Actions" Width="80px">
             <CellDisplayTemplate>
                 <div style="width: 100%; text-align: center;">
-                   @*  @if (UserService.GetRole() == "Admin")
-                    {
-                        <a href="" title="Edit">
-                            <i class="fas fa-edit"></i>|
-                        </a>
-                    } *@
 
                     @if (UserService.GetRole() == "Admin")
                     {

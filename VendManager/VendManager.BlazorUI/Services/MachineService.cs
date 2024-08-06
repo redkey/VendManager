@@ -54,9 +54,9 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<List<MachineVM>> GetMachines()
         {
-           // await AddBearerToken();
-         //   var machines = await _client.MachineAllAsync();
-            var machines = await _client.MachineAsync();
+           await AddBearerToken();
+     
+            var machines = await _client.MachineAllAsync();
             return _mapper.Map<List<MachineVM>>(machines);
 
         }
@@ -64,6 +64,12 @@ namespace VendManager.BlazorUI.Services
         public Task<Response<Guid>> UpdateMachine(long id, MachineVM machine)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpdateMachine(UpdateMachineCommand updateMachineCommand)
+        {
+            await AddBearerToken();
+            await _client.MachineAsync(updateMachineCommand);
         }
     }
 }

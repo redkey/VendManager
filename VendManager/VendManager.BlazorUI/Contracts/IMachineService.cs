@@ -10,6 +10,7 @@ namespace VendManager.BlazorUI.Contracts
         //Task<Response<MachineDetailDto>> GetMachine(long id);
         Task<MachineDetailDto> GetMachine(long id);//
         Task<Response<Guid>> UpdateMachine(long id , MachineVM machine);
+        Task UpdateMachine(UpdateMachineCommand updateMachineCommand);
         Task<Response<Guid>> DeleteMachine(long id);
         Task<List<MachineVM>> GetAllMachinesWithSensorDetails();
         Task<List<SensorDto>> GetMachineChuteDetails(long machineId);

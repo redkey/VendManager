@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VendManager.Application.Features.Machines.Command.UpdateMachine;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails;
 using VendManager.Application.Features.Machines.Query.GetMachineDetails;
@@ -48,6 +49,12 @@ namespace VendManager.API.Controllers
             return machines;
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Put(UpdateMachineCommand updateMachineCommand)
+        {
+            await _mediator.Send(updateMachineCommand);
+            return Ok();
+        }
 
     }
 }

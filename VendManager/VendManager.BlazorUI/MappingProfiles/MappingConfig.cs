@@ -9,6 +9,7 @@ namespace VendManager.BlazorUI.MappingProfiles
         public MappingConfig()
         {
             CreateMap<MachineDto, MachineVM>().ReverseMap();
+            CreateMap<MachineDetailDto, UpdateMachineCommand>().ReverseMap();
 
             //  CreateMap<GetAllMachinesWithSensorDetailsDto, MachineVM>()
             //.ForMember(dest => dest.ID, opt => opt.MapFrom(src => src.Id))

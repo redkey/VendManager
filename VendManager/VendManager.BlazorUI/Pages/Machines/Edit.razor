@@ -13,16 +13,28 @@
     public long MachineId { get; set; }
 
     private MachineDetailDto machine = new MachineDetailDto();
+    private UpdateMachineCommand updateMachineCommand = new UpdateMachineCommand();
 
     protected override async Task OnInitializedAsync()
     {
         machine = await MachineService.GetMachine(MachineId);
+       
+
     }
 
     private async Task Save()
     {
         // Uncomment this line to update the machine
-       // await MachineService.UpdateMachine(machine);
+        updateMachineCommand = new UpdateMachineCommand
+            {
+                Id = machine.Id,
+                Name = machine.Name,
+                SerialNumber = machine.SerialNumber,
+                Location = machine.Location,
+                Notes = machine.Notes,
+                Enabled = machine.Enabled
+            };
+        await MachineService.UpdateMachine(updateMachineCommand);
         NavigationManager.NavigateTo("/machines");
     }
 }
@@ -53,5 +65,6 @@
         <label>Enabled:</label>
         <DxCheckBox @bind-Checked="machine.Enabled" />
     </div>
-    <button type="submit">Save</button>
+    @* <button type="submit">Save</button> *@
+    <DxButton Context="buttonContext" RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true">Save</DxButton>
 </EditForm>
