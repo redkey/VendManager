@@ -3,7 +3,6 @@
 @using VendManager.BlazorUI.Services
 @using VendManager.BlazorUI.Services.Base
 @inject IUserManagementService UserService
-   
 
 @if(User == null)
 {
@@ -11,15 +10,31 @@
 }
 else
 {
-
-        <h4>Name: @User.AspNetUser.FirstName</h4>
-        <h4>Email: @User.AspNetUser.Email</h4>
-        <h4>EmailNotificationIntervalMinutes: @User.EmailNotificationIntervalMinutes</h4>
-        <h4>SmsNotificationIntervalMinutes: @User.SmsNotificationIntervalMinutes</h4>
-        <h4>SmsNotificationIntervalMinutes: @User.SmsNotificationIntervalMinutes</h4>
-        <h4>EmailNotificationLastProcessedAtDateTimeUTC: @User.EmailNotificationLastProcessedAtDateTimeUTC</h4>
-        <h4>SmSlNotificationLastProcessedAtDateTimeUTC: @User.SmSlNotificationLastProcessedAtDateTimeUTC</h4>
-
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="card-title mb-0">User Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Name:</strong> @User.AspNetUser.FirstName</p>
+                    <p><strong>Email:</strong> @User.AspNetUser.Email</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Email Notification Interval (Minutes):</strong> @User.EmailNotificationIntervalMinutes</p>
+                    <p><strong>SMS Notification Interval (Minutes):</strong> @User.SmsNotificationIntervalMinutes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Email Notification Last Processed At (UTC):</strong> @User.EmailNotificationLastProcessedAtDateTimeUTC</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>SMS Notification Last Processed At (UTC):</strong> @User.SmSlNotificationLastProcessedAtDateTimeUTC</p>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 @code {
@@ -35,5 +50,4 @@ else
         User = await UserService.GetUserDetails(Id);
         isLoading = false; // Set loading to false after data retrieval
     }
-} 
-
+}
