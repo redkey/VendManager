@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VendManager.Application.Contracts.Identity;
 using VendManager.Application.Models.Identity;
+using VendManager.Identity.DbContext;
 using VendManager.Identity.Models;
 
 namespace VendManager.Identity.Services
@@ -14,10 +11,12 @@ namespace VendManager.Identity.Services
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly VendManagerIdentityDbContext _context;
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager, VendManagerIdentityDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<User> GetUser(string userId)
@@ -30,6 +29,36 @@ namespace VendManager.Identity.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };
+        }
+
+        public async Task<Application.Models.Identity.UserDetails> GetUserDetails(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if(user != null)
+            {
+                var userDetails =  await _context.UserDetails.Where(u => u.AspNetUserId == userId).SingleAsync();
+                return new Application.Models.Identity.UserDetails
+                {
+                    EmailNotificationIntervalMinutes = userDetails.EmailNotificationIntervalMinutes,
+                    EmailNotificationOnlyOutStockPeriodMinutes = userDetails.EmailNotificationOnlyOutStockPeriodMinutes,
+                    EmailNotificationLastProcessedAtDateTimeUTC = userDetails.EmailNotificationLastProcessedAtDateTimeUTC,
+                    SMSNotificationIntervalMinutes = userDetails.SMSNotificationIntervalMinutes,
+                    SMSlNotificationOnlyOutStockPeriodMinutes = userDetails.SMSlNotificationOnlyOutStockPeriodMinutes,
+                    SMSlNotificationLastProcessedAtDateTimeUTC = userDetails.SMSlNotificationLastProcessedAtDateTimeUTC,
+                    AspNetUserId = userDetails.AspNetUserId,
+                    AspNetUser = new User
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName
+                    }
+                };
+            }
+
+            return null;
+
         }
 
         public async Task<List<User>> GetUsers()

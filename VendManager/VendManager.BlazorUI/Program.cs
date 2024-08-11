@@ -68,6 +68,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
 builder.Services.AddScoped<IMachineService, MachineService>();
+builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

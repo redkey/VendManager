@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using VendManager.BlazorUI.Services.Base;
 
 namespace VendManager.BlazorUI.Services
 {
@@ -18,6 +19,7 @@ namespace VendManager.BlazorUI.Services
             return role;
         }
 
+       
         public string GetUserName()
         {
             var claimsPrincipal = _httpContextAccessor.HttpContext?.User;

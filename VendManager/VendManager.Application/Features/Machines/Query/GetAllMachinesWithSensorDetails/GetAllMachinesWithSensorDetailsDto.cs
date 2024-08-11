@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VendManager.Application.Models;
-using VendManager.Domain;
+﻿using VendManager.Application.Models;
 
 namespace VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails
 {

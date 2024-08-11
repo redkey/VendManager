@@ -42,6 +42,14 @@ namespace VendManager.API.Controllers
             var users = await _userService.GetUsers();
             return Ok(users);
         }
+
+        [HttpGet]
+        [Route("user/{userId}")]
+        public async Task<ActionResult<UserDetails>> GetUser(string userId)
+        {
+            var user = await _userService.GetUserDetails(userId);
+            return Ok(user);
+        }
     }
 
 }

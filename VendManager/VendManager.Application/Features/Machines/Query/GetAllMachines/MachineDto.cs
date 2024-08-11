@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VendManager.Application.Features.Machines.Query.GetAllMachines
+﻿namespace VendManager.Application.Features.Machines.Query.GetAllMachines
 {
     public class MachineDto2
     {

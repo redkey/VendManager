@@ -1,0 +1,39 @@
+﻿@page "/users/details/{Id}"
+@using VendManager.BlazorUI.Contracts
+@using VendManager.BlazorUI.Services
+@using VendManager.BlazorUI.Services.Base
+@inject IUserManagementService UserService
+   
+
+@if(User == null)
+{
+    <DxLoadingPanel Visible="@isLoading" />
+}
+else
+{
+
+        <h4>Name: @User.AspNetUser.FirstName</h4>
+        <h4>Email: @User.AspNetUser.Email</h4>
+        <h4>EmailNotificationIntervalMinutes: @User.EmailNotificationIntervalMinutes</h4>
+        <h4>SmsNotificationIntervalMinutes: @User.SmsNotificationIntervalMinutes</h4>
+        <h4>SmsNotificationIntervalMinutes: @User.SmsNotificationIntervalMinutes</h4>
+        <h4>EmailNotificationLastProcessedAtDateTimeUTC: @User.EmailNotificationLastProcessedAtDateTimeUTC</h4>
+        <h4>SmSlNotificationLastProcessedAtDateTimeUTC: @User.SmSlNotificationLastProcessedAtDateTimeUTC</h4>
+
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private bool isLoading = true;
+
+    public VendManager.BlazorUI.Services.Base.UserDetails User { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await UserService.GetUserDetails(Id);
+        isLoading = false; // Set loading to false after data retrieval
+    }
+} 
+

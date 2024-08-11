@@ -42,30 +42,6 @@ namespace VendManager.BlazorUI.Services.Base
             }
         }
 
-        //protected async Task AddBearerToken()
-        //{
-
-        //    var tokenExists = await _localStorage.ContainKeyAsync("token");
-
-        //    if (tokenExists)
-        //    {
-        //        var token = await _localStorage.GetItemAsync<string>("token");
-
-        //        try
-        //        {
-        //            _client.HttpClient.DefaultRequestHeaders.Authorization =
-        //     new AuthenticationHeaderValue("Bearer", token);
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //            throw;
-        //        }
-
-        //    }
-
-        //}
 
     }
 }

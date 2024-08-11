@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VendManager.Application.Models.Identity;
+﻿using VendManager.Application.Models.Identity;
 
 namespace VendManager.Application.Contracts.Identity
 {
@@ -11,5 +6,6 @@ namespace VendManager.Application.Contracts.Identity
     {
         Task<List<User>> GetUsers();
         Task<User> GetUser(string userId);
+        Task<UserDetails> GetUserDetails(string userId);
     }
 }
