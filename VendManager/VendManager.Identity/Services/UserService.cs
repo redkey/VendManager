@@ -72,5 +72,23 @@ namespace VendManager.Identity.Services
                 LastName = user.LastName
             }).ToList();
         }
+
+        public async Task UpdateUserDetails(Application.Models.Identity.UserDetails userDetails)
+        {
+            var existingUserDetails = await _context.UserDetails.SingleOrDefaultAsync(u => u.AspNetUserId == userDetails.AspNetUserId);
+
+            if (existingUserDetails != null)
+            {
+                existingUserDetails.EmailNotificationIntervalMinutes = userDetails.EmailNotificationIntervalMinutes;
+                existingUserDetails.EmailNotificationOnlyOutStockPeriodMinutes = userDetails.EmailNotificationOnlyOutStockPeriodMinutes;
+                existingUserDetails.EmailNotificationLastProcessedAtDateTimeUTC = userDetails.EmailNotificationLastProcessedAtDateTimeUTC;
+                existingUserDetails.SMSNotificationIntervalMinutes = userDetails.SMSNotificationIntervalMinutes;
+                existingUserDetails.SMSlNotificationOnlyOutStockPeriodMinutes = userDetails.SMSlNotificationOnlyOutStockPeriodMinutes;
+                existingUserDetails.SMSlNotificationLastProcessedAtDateTimeUTC = userDetails.SMSlNotificationLastProcessedAtDateTimeUTC;
+
+                _context.UserDetails.Update(existingUserDetails);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

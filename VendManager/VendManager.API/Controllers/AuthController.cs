@@ -29,7 +29,7 @@ namespace VendManager.API.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult<RegistrationRequest>> Register([FromBody] RegistrationRequest request)
+        public async Task<ActionResult<RegistrationResponse>> Register([FromBody] RegistrationRequest request)
         {
             var response = await _authService.Register(request);
             return Ok(response);
@@ -49,6 +49,14 @@ namespace VendManager.API.Controllers
         {
             var user = await _userService.GetUserDetails(userId);
             return Ok(user);
+        }
+
+        [HttpPut]
+        [Route("user")]
+        public async Task<ActionResult> UpdateUserDetails([FromBody] UserDetails userDetails)
+        {
+            await _userService.UpdateUserDetails(userDetails);
+            return Ok();
         }
     }
 

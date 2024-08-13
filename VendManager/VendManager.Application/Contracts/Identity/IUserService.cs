@@ -7,5 +7,8 @@ namespace VendManager.Application.Contracts.Identity
         Task<List<User>> GetUsers();
         Task<User> GetUser(string userId);
         Task<UserDetails> GetUserDetails(string userId);
+
+        //Update User Details
+        Task UpdateUserDetails(UserDetails userDetails);
     }
 }

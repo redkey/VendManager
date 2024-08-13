@@ -47,9 +47,9 @@ namespace VendManager.BlazorUI.Pages.Users
         }
       
 
-        private void NavigateToEdit(long machineId)
+        private void NavigateToEdit(string Id)
         {
-            NavigationManager.NavigateTo($"/machines/edit/{machineId}");
+            NavigationManager.NavigateTo($"/user/edit/{Id}");
         }
     }
 }

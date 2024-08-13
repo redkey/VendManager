@@ -20,7 +20,7 @@
 
                     @if (UserService.GetRole() == "Admin")
                     {
-                        <a href="" @onclick:preventDefault  title="Edit">
+                        <a href="" @onclick:preventDefault @onclick="() => NavigateToEdit(((User)context.DataItem).Id)" title="Edit">
                             <i class="fas fa-edit"></i>|
                         </a>
                     }

@@ -19,8 +19,13 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<UserDetails> GetUserDetails(string userId)
         {
-            var user = await _client.UserAsync(userId);
+            var user = await _client.UserGETAsync(userId);
             return user;
+        }
+
+        public async Task UpdateUserDetails(UserDetails userDetails)
+        {
+            await _client.UserPUTAsync(userDetails);
         }
     }
 }

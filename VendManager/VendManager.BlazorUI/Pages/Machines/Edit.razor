@@ -24,7 +24,7 @@
 
     private async Task Save()
     {
-        // Uncomment this line to update the machine
+  
         updateMachineCommand = new UpdateMachineCommand
             {
                 Id = machine.Id,
@@ -65,6 +65,6 @@
         <label>Enabled:</label>
         <DxCheckBox @bind-Checked="machine.Enabled" />
     </div>
-    @* <button type="submit">Save</button> *@
+
     <DxButton Context="buttonContext" RenderStyle="ButtonRenderStyle.Primary" SubmitFormOnClick="true">Save</DxButton>
 </EditForm>

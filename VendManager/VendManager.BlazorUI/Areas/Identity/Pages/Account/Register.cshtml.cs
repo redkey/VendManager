@@ -1,28 +1,27 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net;
 using System.Security.Claims;
-using VendManager.BlazorUI.Services;
-
-
-
+using VendManager.BlazorUI.Models;
+using VendManager.BlazorUI.Services.Base;
 
 namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly CustomAuthenticationService _auth;
-        public RegisterModel(CustomAuthenticationService auth)
+        private readonly IClient _client;   
+        public RegisterModel(IClient client)
         {
-          _auth = auth; 
+            _client = client;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }   
         public string ReturnUrl { get; set; }
+        public string ErrorMessage { get; set; }
+        public string Token { get; private set; }
+
         public void OnGet()
         {
             ReturnUrl = Url.Content("~/");
@@ -31,31 +30,61 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync()
         {
             ReturnUrl = Url.Content("~/");
+
             if (ModelState.IsValid)
             {
-
-                var claim = new List<Claim>();
-                claim.Add(new Claim(ClaimTypes.Name, Input.Email));
-                claim.Add(new Claim(ClaimTypes.Email, Input.Email));
-                claim.Add(new Claim("password", Input.Password));
-                claim.Add(new Claim(ClaimTypes.Role, Input.Role));
+                var loginRequest = new RegistrationRequest { Email = Input.Email, Password = Input.Password , FirstName = Input.FirstName , LastName = Input.LastName , Role = "Customer" };
+                var registerResponse = await _client.RegisterAsync(loginRequest);
 
 
-                var claimsIdentity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
+                if (registerResponse.UserId != null)
+                {
 
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
-                _auth.Users.Add(Input.Email, claimsPrincipal);
+                   var response = await _client.LoginAsync(new AuthRequest { Email = Input.Email, Password = Input.Password });
+                    // var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, new AuthenticationProperties { IsPersistent = Input.KeepSignedIn });
-                return LocalRedirect(ReturnUrl);
+                    if (response.Token != null)
+                    {
+                        Token = response.Token;
+
+                        var claims = new[]
+                        {
+                            new Claim(ClaimTypes.Name, Input.Email),
+                            new Claim("JWT", response.Token),
+                            new Claim("Role" , response.Roles.First())
+                        };
+
+                        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var principal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = Input.KeepSignedIn });
+
+                        var token = response.Token;
+                        return LocalRedirect($"/Identity/Account/StoreToken?Token={token}");
+
+                    }
+                    else
+                    {
+                        ErrorMessage = "Invalid login attempt.";
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    }
+                }
+                else
+                {
+                    ErrorMessage = "Invalid Register attempt.";
+                    ModelState.AddModelError(string.Empty, "Invalid Register attempt.");
+                }
             }
+
             return Page();
         }
-        
+
         public class InputModel
         {
             public string Email { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
             public string Password { get; set; }
             public string Role { get; set; } = "ADMIN"; // Default role is "ADMIN
             public bool KeepSignedIn { get; set; }
