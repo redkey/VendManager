@@ -1,6 +1,9 @@
 ﻿@page "/viewusers"
 <h3>ViewUsers</h3>
 
+<a href="" @onclick:preventDefault title="Create User">
+    <i class="fas fa-plus"></i>
+</a>
 
 <DxLoadingPanel Visible="@isLoading" />
 <DxGrid Data="Users"
@@ -9,6 +12,19 @@
         <DxGridDataColumn FieldName="Email" />
         <DxGridDataColumn FieldName="FirstName" />
         <DxGridDataColumn FieldName="LastName" />
+        <DxGridDataColumn Caption="Actions" Width="80px">
+            <CellDisplayTemplate>
+               
+                <a href="" @onclick:preventDefault title="Edit">
+                    <i class="fas fa-info"></i>
+                </a>
+
+                <a href="" @onclick:preventDefault title="Delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
     </Columns>
 
 </DxGrid>

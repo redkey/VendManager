@@ -10,5 +10,6 @@ namespace VendManager.Application.Contracts.Identity
 
         //Update User Details
         Task UpdateUserDetails(UserDetails userDetails);
+        Task DeactivateUser (string userId);
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
-using VendManager.BlazorUI.Models;
 using VendManager.BlazorUI.Services.Base;
 
 namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
@@ -33,7 +32,7 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var loginRequest = new RegistrationRequest { Email = Input.Email, Password = Input.Password , FirstName = Input.FirstName , LastName = Input.LastName , Role = "Customer" };
+                var loginRequest = new RegistrationRequest { Email = Input.Email, Password = Input.Password , FirstName = Input.FirstName , LastName = Input.LastName , Role = "Customer" , Enabled = false};
                 var registerResponse = await _client.RegisterAsync(loginRequest);
 
 

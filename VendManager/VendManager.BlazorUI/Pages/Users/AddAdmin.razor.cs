@@ -29,7 +29,7 @@ namespace VendManager.BlazorUI.Pages.Users
             try
             {
                 
-                var adminCreateRequest = new RegistrationRequest { Email = username, FirstName = firstname, LastName = lastname, Password = password , Role = "Admin"};   
+                var adminCreateRequest = new RegistrationRequest { Email = username, FirstName = firstname, LastName = lastname, Password = password , Role = "Admin" , Enabled = true};   
                 await _client.RegisterAsync(adminCreateRequest);
                 NavigationManager.NavigateTo("/viewusers");
                 

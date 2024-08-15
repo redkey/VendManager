@@ -67,7 +67,7 @@ namespace VendManager.Identity.Services
                 UserName = requests.Email,
                 FirstName = requests.FirstName,
                 LastName = requests.LastName,
-                EmailConfirmed = true
+                EmailConfirmed = true     
             };
 
             var result = await _userManager.CreateAsync(user, requests.Password);

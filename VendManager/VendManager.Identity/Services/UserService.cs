@@ -19,6 +19,18 @@ namespace VendManager.Identity.Services
             _context = context;
         }
 
+        public async Task DeactivateUser(string userId)
+        {
+            var user = await _context.FindAsync<ApplicationUser>(userId);
+            
+            if(user != null)
+            {
+
+               user.Enabled = false;
+               await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<User> GetUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -64,13 +76,17 @@ namespace VendManager.Identity.Services
         public async Task<List<User>> GetUsers()
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
-            return users.Select(user => new User
+
+            var activeUsers = users.Where(u => u.Enabled == true);
+
+            return activeUsers.Select(user => new User
             {
                 Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName
             }).ToList();
+            
         }
 
         public async Task UpdateUserDetails(Application.Models.Identity.UserDetails userDetails)

@@ -58,6 +58,14 @@ namespace VendManager.API.Controllers
             await _userService.UpdateUserDetails(userDetails);
             return Ok();
         }
+
+        [HttpPut]
+        [Route("deactivate/{userId}")]
+        public async Task<ActionResult> DeactivateUser(string userId)
+        {
+            await _userService.DeactivateUser(userId);
+            return Ok();
+        }
     }
 
 }
