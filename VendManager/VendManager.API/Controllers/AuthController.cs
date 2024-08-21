@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Contracts.Identity;
 using VendManager.Application.Models.Identity;
 
@@ -62,7 +61,7 @@ namespace VendManager.API.Controllers
         [HttpPut]
         [Route("deactivate/{userId}")]
         public async Task<ActionResult> DeactivateUser(string userId)
-        {
+            {
             await _userService.DeactivateUser(userId);
             return Ok();
         }

@@ -1,9 +1,8 @@
 ﻿@page "/viewusers"
+@using VendManager.BlazorUI.Services.Base
 <h3>ViewUsers</h3>
 
-<a href="" @onclick:preventDefault title="Create User">
-    <i class="fas fa-plus"></i>
-</a>
+<DxButton CssClass="my-4" Text="CREATE USER"></DxButton>
 
 <DxLoadingPanel Visible="@isLoading" />
 <DxGrid Data="Users"
@@ -15,16 +14,24 @@
         <DxGridDataColumn Caption="Actions" Width="80px">
             <CellDisplayTemplate>
                
-                <a href="" @onclick:preventDefault title="Edit">
+                <a href="" @onclick:preventDefault  title="Edit">
                     <i class="fas fa-info"></i>
                 </a>
 
-                <a href="" @onclick:preventDefault title="Delete">
+                <a href="" @onclick:preventDefault @onclick="() => DeactivateUserTest(true, ((User)context.DataItem).Id)" title="Delete">
                     <i class="fas fa-trash"></i>
                 </a>
-
             </CellDisplayTemplate>
         </DxGridDataColumn>
     </Columns>
 
 </DxGrid>
+
+<DxPopup @bind-Visible="@Visible" HeaderText="Confirm Delete" BodyText="Are you sure you want to delete?" ShowFooter="true" ShowCloseButton="false" HorizontalAlignment="HorizontalAlignment.Center" AllowDrag="true">
+    <FooterContentTemplate>
+        <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="DeleteUser" />
+        <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
+
+
