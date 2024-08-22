@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Pages\Machines\SensorHistory.razor" />
     <Content Remove="Pages\Users\Details.razor" />
   </ItemGroup>
   <ItemGroup>
@@ -14,5 +15,14 @@
     <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="23.2.3" />
     <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Machines\SensorHistory.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Machines\SensorHistory.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pages\Machines\SensorHistory.razor" />
   </ItemGroup>
 </Project>
