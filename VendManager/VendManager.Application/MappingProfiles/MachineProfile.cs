@@ -34,6 +34,8 @@ namespace VendManager.Application.MappingProfiles
 
             //// Mapping for SensorBar to SensorBarDto
             //CreateMap<SensorBar, SensorBarDto>().ReverseMap();
+
+            CreateMap<SensorValueHistory, SensorValueHistoryDto>().ReverseMap();
         }
 
     }

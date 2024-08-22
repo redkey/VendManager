@@ -40,7 +40,7 @@ namespace VendManager.BlazorUI.Pages.Users
 
             Visible = false;
             UserManagementService.DeleteUserDetails(SelectedUserId);
-            await FetchUsers();
+            await OnAfterRenderAsync(true);
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {

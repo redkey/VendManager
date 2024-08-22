@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Contracts\Email\" />
     <Folder Include="Features\Sensors\Command\" />
+    <Folder Include="Features\SensorValueHistory\Command\" />
   </ItemGroup>
 
   <ItemGroup>

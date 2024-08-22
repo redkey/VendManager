@@ -28,7 +28,11 @@
                     }
                     
                     <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((MachineVM)context.DataItem).ID)" title="See More">
-                        <i class="fas fa-info"></i>
+                        <i class="fas fa-info"></i>|
+                    </a>
+
+                    <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((MachineVM)context.DataItem).ID)" title="Sensor History">
+                        <i class="fas fa-history"></i>
                     </a>
                 </div>
             </CellDisplayTemplate>
