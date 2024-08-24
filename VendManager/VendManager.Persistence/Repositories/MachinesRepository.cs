@@ -24,7 +24,8 @@ namespace VendManager.Persistence.Repositories
         {
             var machines = await _context.Machines
                 .Include(x => x.SensorBars)
-            
+                .ThenInclude(x => x.Sensors)
+                .ThenInclude(x => x.SensorValueHistory)
                 .ToListAsync();
 
             return machines;

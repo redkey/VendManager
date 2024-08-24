@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.Machines.Command.UpdateMachine;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
 using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorDetails;
+using VendManager.Application.Features.Machines.Query.GetAllMachinesWithSensorHistory;
 using VendManager.Application.Features.Machines.Query.GetMachineDetails;
 using VendManager.Application.Models;
 
@@ -13,7 +13,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class MachineController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,6 +36,15 @@ namespace VendManager.API.Controllers
         public async Task<List<GetAllMachinesWithSensorDetailsDto>> GetMachinesWithSensorDetails()
         {
             var machines = await _mediator.Send(new GetAllMachinesWithSensorDetailsQuery());
+
+            return machines;
+        }
+
+        [HttpGet]
+        [Route("GetAllMachinesWithSensorHistoryDetails")]
+        public async Task<List<GetAllMachinesWithSensorDetailsDto>> GetMachinesWithSensorHistoryDetails()
+        {
+            var machines = await _mediator.Send(new GetAllMachinesWithSensorHistoryQuery());
 
             return machines;
         }

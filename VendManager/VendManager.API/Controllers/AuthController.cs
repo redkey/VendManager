@@ -43,6 +43,14 @@ namespace VendManager.API.Controllers
         }
 
         [HttpGet]
+        [Route("deactivatesusers")]
+        public async Task<ActionResult<List<User>>> GetDeactivatedUsers()
+        {
+            var users = await _userService.GetDeactivatedUsers();
+            return Ok(users);
+        }
+
+        [HttpGet]
         [Route("user/{userId}")]
         public async Task<ActionResult<UserDetails>> GetUser(string userId)
         {
@@ -62,6 +70,14 @@ namespace VendManager.API.Controllers
         [Route("deactivate/{userId}")]
         public async Task<ActionResult> DeactivateUser(string userId)
             {
+            await _userService.DeactivateUser(userId);
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("activate/{userId}")]
+        public async Task<ActionResult> ActivateUser(string userId)
+        {
             await _userService.DeactivateUser(userId);
             return Ok();
         }

@@ -19,6 +19,18 @@ namespace VendManager.Identity.Services
             _context = context;
         }
 
+        public async Task ActivateUser(string userId)
+        {
+            var user = await _context.FindAsync<ApplicationUser>(userId);
+
+            if (user != null)
+            {
+
+                user.Enabled = true;
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task DeactivateUser(string userId)
         {
             var user = await _context.FindAsync<ApplicationUser>(userId);
@@ -29,6 +41,21 @@ namespace VendManager.Identity.Services
                user.Enabled = false;
                await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<User>> GetDeactivatedUsers()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Customer");
+
+            var activeUsers = users.Where(u => u.Enabled == false);
+
+            return activeUsers.Select(user => new User
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            }).ToList();
         }
 
         public async Task<User> GetUser(string userId)

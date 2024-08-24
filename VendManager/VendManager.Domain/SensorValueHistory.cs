@@ -8,5 +8,7 @@ namespace VendManager.Domain
         public DateTime DateTimeUTC { get; set; }
         public long SensorID { get; set; }
         public bool HasStock { get; set; }
+
     }
 }
+    

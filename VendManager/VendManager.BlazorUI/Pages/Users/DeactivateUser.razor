@@ -1,0 +1,37 @@
+﻿@page "/viewdeactivatedusers"
+@using VendManager.BlazorUI.Services
+@using VendManager.BlazorUI.Services.Base
+@inject IUserService UserService
+
+
+<h3>Deactivated Users</h3>
+
+
+<DxLoadingPanel Visible="@isLoading" />
+<DxGrid Data="Users"
+        ShowFilterRow="true">
+    <Columns>
+        <DxGridDataColumn FieldName="Email" />
+        <DxGridDataColumn FieldName="FirstName" />
+        <DxGridDataColumn FieldName="LastName" />
+        <DxGridDataColumn Caption="Actions" Width="80px">
+            <CellDisplayTemplate>
+                <div style="width: 100%; text-align: center;">
+
+                    @if (UserService.GetRole() == "Admin")
+                    {
+                        <a href="" @onclick:preventDefault @onclick="() => NavigateToEdit(((User)context.DataItem).Id)" title="Activate">
+                            <i class="fas fa-unlock"></i>
+                        </a>
+                    }
+
+                   @*  <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((User)context.DataItem).Id)" title="See More">
+                        <i class="fas fa-info"></i>
+                    </a> *@
+                </div>
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
+    </Columns>
+
+</DxGrid>
+

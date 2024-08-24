@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Components;
 using VendManager.BlazorUI.Services.Base;
 
 namespace VendManager.BlazorUI.Pages.Users
-{
-    public partial class ActivateUser
+{   
+    public partial class DeactivateUser
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -24,7 +24,7 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             if (firstRender)
             {
-                var users = await Client.UsersAsync();
+                var users = await Client.DeactivatesusersAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval
                 StateHasChanged(); // Notify the component to re-render
@@ -42,10 +42,10 @@ namespace VendManager.BlazorUI.Pages.Users
                 // Handle the case where Id is null or empty
                 // For example, show an error message or log the issue
             }
-
-
+           
+              
         }
-
+      
 
         private void NavigateToEdit(string Id)
         {
