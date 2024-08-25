@@ -39,8 +39,9 @@ namespace VendManager.BlazorUI.Pages.Users
             }
 
             Visible = false;
-            UserManagementService.DeleteUserDetails(SelectedUserId);
-            await OnAfterRenderAsync(true);
+            await UserManagementService.DeleteUserDetails(SelectedUserId);
+            NavigationManager.NavigateTo($"/viewdeactivatedusers");
+   
         }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -64,7 +65,7 @@ namespace VendManager.BlazorUI.Pages.Users
             //Visible = true;
             UserManagementService.DeleteUserDetails(userId);
             StateHasChanged(); // Notify the component to re-render
-           // NavigationManager.NavigateTo($"/viewusers");
+          
         }
 
         protected void DeactivateUserTest(bool state, string userId)

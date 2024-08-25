@@ -20,18 +20,20 @@
 
                     @if (UserService.GetRole() == "Admin")
                     {
-                        <a href="" @onclick:preventDefault @onclick="() => NavigateToEdit(((User)context.DataItem).Id)" title="Activate">
+                        <a href="" @onclick:preventDefault @onclick="() => ActivateUser(true, ((User)context.DataItem).Id)" title="Activate">
                             <i class="fas fa-unlock"></i>
                         </a>
                     }
-
-                   @*  <a href="" @onclick:preventDefault @onclick="() => NavigateToDetails(((User)context.DataItem).Id)" title="See More">
-                        <i class="fas fa-info"></i>
-                    </a> *@
                 </div>
             </CellDisplayTemplate>
         </DxGridDataColumn>
     </Columns>
 
 </DxGrid>
+<DxPopup @bind-Visible="@Visible" HeaderText="Confirm Activate" BodyText="Are you sure you want to activate?" ShowFooter="true" ShowCloseButton="false" HorizontalAlignment="HorizontalAlignment.Center" AllowDrag="true">
+    <FooterContentTemplate>
+        <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Primary" Text="OK" Click="ActivateUser" />
+        <DxButton CssClass="popup-button my-1 ms-2" RenderStyle="ButtonRenderStyle.Secondary" Text="Cancel" Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
 

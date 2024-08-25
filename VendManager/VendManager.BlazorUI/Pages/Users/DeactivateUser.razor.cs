@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Components;
+using VendManager.BlazorUI.Contracts;
+using VendManager.BlazorUI.Services;
 using VendManager.BlazorUI.Services.Base;
 
 namespace VendManager.BlazorUI.Pages.Users
@@ -11,15 +13,16 @@ namespace VendManager.BlazorUI.Pages.Users
         [Inject]
         public IClient Client { get; set; }
 
+        [Inject]
+        public IUserManagementService UserManagementService { get; set; }
+
         public List<User> Users { get; set; }
+        public string SelectedUserId { get; set; }
 
         private bool isLoading = true;
+        bool Visible { get; set; } = false;
 
         public string Message { get; set; } = string.Empty;
-        protected void CreateMachine()
-        {
-            NavigationManager.NavigateTo("/machines/create");
-        }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -30,26 +33,28 @@ namespace VendManager.BlazorUI.Pages.Users
                 StateHasChanged(); // Notify the component to re-render
             }
         }
-        protected void NavigateToDetails(string Id)
-        {
-            // NavigationManager.NavigateTo($"/user/details/{Id}");
-            if (!string.IsNullOrEmpty(Id))
-            {
-                NavigationManager.NavigateTo($"/users/details/{Id}");
-            }
-            else
-            {
-                // Handle the case where Id is null or empty
-                // For example, show an error message or log the issue
-            }
-           
-              
-        }
-      
 
-        private void NavigateToEdit(string Id)
+        protected void ActivateUser(bool state,string userId)
         {
-            NavigationManager.NavigateTo($"/user/edit/{Id}");
+            Visible = true;
+            SelectedUserId = userId;
+
         }
+
+
+        public async Task ActivateUser()
+        {   
+            if (String.IsNullOrEmpty(SelectedUserId))
+            {
+                Message = "Please select a user to delete";
+                return;
+            }
+
+            Visible = false;
+            await UserManagementService.ActivateUser(SelectedUserId);
+            NavigationManager.NavigateTo($"/viewusers");
+
+        }
+
     }
 }

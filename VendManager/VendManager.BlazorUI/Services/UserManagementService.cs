@@ -15,6 +15,11 @@ namespace VendManager.BlazorUI.Services
         {
         }
 
+        public async Task ActivateUser(string userId)
+        {
+            await _client.ActivateAsync(userId);
+        }
+
         public async Task DeleteUserDetails(string userId)
         {
             await _client.DeactivateAsync(userId);

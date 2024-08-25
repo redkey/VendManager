@@ -8,5 +8,6 @@ namespace VendManager.BlazorUI.Contracts
         Task UpdateUserDetails(UserDetails userDetails);
 
         Task DeleteUserDetails(string userId);
+        Task ActivateUser(string userId);
     }
 }

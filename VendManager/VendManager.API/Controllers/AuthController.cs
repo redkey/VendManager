@@ -78,7 +78,7 @@ namespace VendManager.API.Controllers
         [Route("activate/{userId}")]
         public async Task<ActionResult> ActivateUser(string userId)
         {
-            await _userService.DeactivateUser(userId);
+            await _userService.ActivateUser(userId);
             return Ok();
         }
     }
