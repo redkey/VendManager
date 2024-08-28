@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.Sensors.Query;
 using VendManager.Application.Features.Sensors.Query.GetAllSensorsWithSameMachine;
@@ -12,6 +13,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SensorController : ControllerBase
     {
 

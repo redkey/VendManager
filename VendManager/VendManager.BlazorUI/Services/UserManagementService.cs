@@ -17,22 +17,26 @@ namespace VendManager.BlazorUI.Services
 
         public async Task ActivateUser(string userId)
         {
+            await AddBearerToken();
             await _client.ActivateAsync(userId);
         }
 
         public async Task DeleteUserDetails(string userId)
         {
+            await AddBearerToken();
             await _client.DeactivateAsync(userId);
         }
 
         public async Task<UserDetails> GetUserDetails(string userId)
         {
+            await AddBearerToken();
             var user = await _client.UserGETAsync(userId);
             return user;
         }
 
         public async Task UpdateUserDetails(UserDetails userDetails)
         {
+            await AddBearerToken();
             await _client.UserPUTAsync(userDetails);
         }
     }

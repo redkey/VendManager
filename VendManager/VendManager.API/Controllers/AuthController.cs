@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Contracts.Identity;
 using VendManager.Application.Models.Identity;
 
@@ -6,6 +7,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -19,6 +21,7 @@ namespace VendManager.API.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("login")]
         public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
         {

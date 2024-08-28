@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.Machines.Command.UpdateMachine;
 using VendManager.Application.Features.Machines.Query.GetAllMachines;
@@ -13,7 +14,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize]
+    [Authorize]
     public class MachineController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VendManager.Application.Features.SensorValueHistory.Query.GetAllSensorValueHistory;
 using VendManager.Application.Features.SensorValueHistory.Query.GetAllSensorValueHistoryById;
@@ -10,6 +11,7 @@ namespace VendManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SensorValueHistoryController : ControllerBase
     {
 

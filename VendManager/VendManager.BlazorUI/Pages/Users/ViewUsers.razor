@@ -2,7 +2,7 @@
 @using VendManager.BlazorUI.Services.Base
 <h3>ViewUsers</h3>
 
-<DxButton CssClass="my-4" Text="CREATE USER"></DxButton>
+<DxButton CssClass="my-4" Text="CREATE USER" @onclick="CreateUser"></DxButton>
 
 <DxLoadingPanel Visible="@isLoading" />
 <DxGrid Data="Users"

@@ -56,5 +56,10 @@ namespace VendManager.BlazorUI.Pages.Users
 
         }
 
+
+        private void CreateUser()
+        {
+            NavigationManager.NavigateTo("/createuser");
+        }
     }
 }

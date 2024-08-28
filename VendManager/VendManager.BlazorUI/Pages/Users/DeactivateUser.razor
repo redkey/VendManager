@@ -6,7 +6,8 @@
 
 <h3>Deactivated Users</h3>
 
-<DxButton CssClass="my-4" Text="CREATE USER"></DxButton>
+<DxButton CssClass="my-4" Text="CREATE USER" @onclick="CreateUser"></DxButton>
+
 <DxLoadingPanel Visible="@isLoading" />
 <DxGrid Data="Users"
         ShowFilterRow="true">
