@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendManager.Identity.DbContext;
 
@@ -11,9 +12,11 @@ using VendManager.Identity.DbContext;
 namespace VendManager.Identity.Migrations
 {
     [DbContext(typeof(VendManagerIdentityDbContext))]
-    partial class VendManagerIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240828143543_AddedActivatedFlagToUser")]
+    partial class AddedActivatedFlagToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,14 +199,14 @@ namespace VendManager.Identity.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Enabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
@@ -264,18 +267,18 @@ namespace VendManager.Identity.Migrations
                         {
                             Id = "82aa9131-f8ed-4aa4-b997-92a8671ac502",
                             AccessFailedCount = 0,
-                            Activated = false,
-                            ConcurrencyStamp = "2ce6dcbc-e2ed-47d1-a93b-ea4281ef4085",
-                            Deleted = false,
+                            Activated = true,
+                            ConcurrencyStamp = "1ac05a57-c841-4f31-b4f3-0f444cb401c4",
                             Email = "admin@vendmanager.co",
                             EmailConfirmed = true,
+                            Enabled = true,
                             FirstName = "System",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@VENDMANAGER.CO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAq9XojUoanXAAILIVayTMXcvNs4h+ZO2kA1ib27WNHaIOPWnmMh6bLT6tdcsdgyXQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPzaFk+ZRV3bvi3O7mCOliEeoKTw1R2STMi1C3Bw0Fx/nlP35e4STNF3Dc+j2r+7+A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2afc71e-d2fb-448b-92a8-cab6c95b7714",
+                            SecurityStamp = "6dba7b96-1c68-4ee2-acee-a2c0e559e367",
                             TwoFactorEnabled = false,
                             UserName = "admin@vendmanager.co"
                         },
@@ -283,18 +286,18 @@ namespace VendManager.Identity.Migrations
                         {
                             Id = "82aa9131-f8ed-4aa4-b997-92a8671ac503",
                             AccessFailedCount = 0,
-                            Activated = false,
-                            ConcurrencyStamp = "0513ac0b-120f-498f-84da-fa4553aca1a5",
-                            Deleted = false,
+                            Activated = true,
+                            ConcurrencyStamp = "c81d64e0-482e-4207-9275-f573b100fb93",
                             Email = "customer@vendmanager.co",
                             EmailConfirmed = true,
+                            Enabled = true,
                             FirstName = "System",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@VENDMANAGER.CO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJstFXkoWsAZad3zVSnLE0eFCZPvP5IRFaDKJrLlZ4lKIRLQ54aFfDKQgTMA4UuzIg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMZ924j4ZfbmhW0DYdJFl5wpB+Yo2N3nzf8QPFgLk4qiMlUBGHFmqciG8BKXxO6Q1g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c2b5af4-f939-4758-854b-b38786d6039b",
+                            SecurityStamp = "34215ace-ad03-405b-9ba6-e652723d26b0",
                             TwoFactorEnabled = false,
                             UserName = "customer@vendmanager.co"
                         });

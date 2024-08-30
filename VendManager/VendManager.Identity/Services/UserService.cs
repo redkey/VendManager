@@ -26,7 +26,7 @@ namespace VendManager.Identity.Services
             if (user != null)
             {
 
-                user.Enabled = true;
+                user.Deleted = true;
                 await _context.SaveChangesAsync();
             }
         }
@@ -38,7 +38,7 @@ namespace VendManager.Identity.Services
             if(user != null)
             {
 
-               user.Enabled = false;
+               user.Deleted = false;
                await _context.SaveChangesAsync();
             }
         }
@@ -47,7 +47,7 @@ namespace VendManager.Identity.Services
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
 
-            var activeUsers = users.Where(u => u.Enabled == false);
+            var activeUsers = users.Where(u => u.Deleted == false);
 
             return activeUsers.Select(user => new User
             {
@@ -104,7 +104,7 @@ namespace VendManager.Identity.Services
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
 
-            var activeUsers = users.Where(u => u.Enabled == true);
+            var activeUsers = users.Where(u => u.Activated == false);
 
             return activeUsers.Select(user => new User
             {

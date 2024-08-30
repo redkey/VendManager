@@ -61,6 +61,14 @@ namespace VendManager.API.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        [Route("users/{userId}")]
+        public async Task<ActionResult<User>> GetUsers(string userId)
+        {
+            var user = await _userService.GetUser(userId);
+            return Ok(user);
+        }
+
         [HttpPut]
         [Route("user")]
         public async Task<ActionResult> UpdateUserDetails([FromBody] UserDetails userDetails)

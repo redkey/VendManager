@@ -1,0 +1,132 @@
+﻿@page "/user/edit/{Id}"
+
+@using VendManager.BlazorUI.Contracts
+@using VendManager.BlazorUI.Services.Base
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IClient _client
+@inject NavigationManager _navigationManager
+@inject NavigationManager NavigationManager
+
+@* Include Bootstrap 5 *@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        background-color: #f8f9fa;
+        padding-top: 20px; /* Add some padding to give space at the top */
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white; /* Set background to white */
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Add shadow for better visibility */
+        margin: 0 auto;
+    }
+
+    .login-logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 120px;
+    }
+
+    .forgot-password {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #0d6efd;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .new-account-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .new-account-section::before,
+        .new-account-section::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid #ddd;
+            margin: 0 10px;
+        }
+
+        .new-account-section p {
+            margin: 0;
+        }
+
+        .new-account-section button {
+            display: block;
+            margin: 10px auto 0;
+        }
+
+    .spinner-border {
+        width: 1rem;
+        height: 1rem;
+        border-width: 0.2em;
+    }
+</style>
+
+<div class="login-container">
+    <div class="card login-card">
+        <img src="./images/redkey.jpg" alt="Logo" class="login-logo" />
+        <hr />
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(Message))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Message
+                </div>
+            }
+            <h5 class="card-title text-center">Activate User @user.FirstName</h5>
+            <br />
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="EmailNotificationIntervalMinutes" @bind="EmailNotificationIntervalMinutes" />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="EmailNotificationOnlyOutStockPeriodMinutes" @bind="EmailNotificationOnlyOutStockPeriodMinutes" />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="SmsNotificationIntervalMinutes" @bind="SmsNotificationIntervalMinutes" />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="SmSlNotificationOnlyOutStockPeriodMinutes" @bind="SmSlNotificationOnlyOutStockPeriodMinutes" />
+                  
+                </div>
+                <button type="button" class="btn btn-primary w-100" @onclick="RegisterAdmin" disabled="@isSubmitting">
+                    @if (isSubmitting)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="visually-hidden">Loading...</span>
+                    }
+                    else
+                    {
+                        <span>Activate</span>
+                    }
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

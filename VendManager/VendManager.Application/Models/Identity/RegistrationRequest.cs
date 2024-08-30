@@ -19,10 +19,11 @@ namespace VendManager.Application.Models.Identity
         public string Email { get; set; }
 
         [Required]
-        [MinLength(6)]
+        [MinLength(6)]  
         public string Password { get; set; }
 
         public bool Enabled { get; set; }
+        public bool Activated { get; set; }
 
     }
 }

@@ -7,7 +7,8 @@ namespace VendManager.Identity.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public bool Enabled { get; set; } = true;
+        public bool Deleted { get; set; } = false;   
+        public bool Activated { get; set; } = false;
 
         public virtual UserDetails UserDetails { get; set; } // Navigation property for one-to-one relationship
     }

@@ -24,7 +24,7 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             if (firstRender)
             {
-                var users = await Client.UsersAsync();
+                var users = await Client.UsersAllAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval
                 StateHasChanged(); // Notify the component to re-render
@@ -44,7 +44,7 @@ namespace VendManager.BlazorUI.Pages.Users
             }
 
 
-        }
+        } 
 
 
         private void NavigateToEdit(string Id)
