@@ -54,6 +54,14 @@ namespace VendManager.API.Controllers
         }
 
         [HttpGet]
+        [Route("deletedusers")]
+        public async Task<ActionResult<List<User>>> GetDeletedUsers()
+        {
+            var users = await _userService.GetDeletedUsers();
+            return Ok(users);
+        }
+
+        [HttpGet]
         [Route("user/{userId}")]
         public async Task<ActionResult<UserDetails>> GetUser(string userId)
         {

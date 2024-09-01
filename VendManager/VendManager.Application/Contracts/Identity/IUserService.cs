@@ -6,6 +6,7 @@ namespace VendManager.Application.Contracts.Identity
     {
         Task<List<User>> GetUsers();
         Task<List<User>> GetDeactivatedUsers();
+        Task<List<User>> GetDeletedUsers();
         Task<User> GetUser(string userId);
         Task<UserDetails> GetUserDetails(string userId);    
 

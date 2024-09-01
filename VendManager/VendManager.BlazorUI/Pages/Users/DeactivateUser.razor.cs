@@ -27,7 +27,7 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             if (firstRender)
             {
-                var users = await Client.DeactivatesusersAsync();
+                var users = await Client.DeletedusersAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval
                 StateHasChanged(); // Notify the component to re-render
@@ -51,7 +51,7 @@ namespace VendManager.BlazorUI.Pages.Users
             }
 
             Visible = false;
-            await UserManagementService.ActivateUser(SelectedUserId);
+            await UserManagementService.UnDeleteUser(SelectedUserId);
             NavigationManager.NavigateTo($"/viewusers");
 
         }

@@ -24,7 +24,7 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             if (firstRender)
             {
-                var users = await Client.UsersAllAsync();
+                var users = await Client.DeactivatesusersAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval
                 StateHasChanged(); // Notify the component to re-render

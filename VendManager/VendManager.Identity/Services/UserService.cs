@@ -71,7 +71,23 @@ namespace VendManager.Identity.Services
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
 
-            var activeUsers = users.Where(u => u.Deleted == false);
+            var activeUsers = users.Where(u => u.Activated == false).ToList();
+
+            return activeUsers.Select(user => new User
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            }).ToList();
+        }
+
+
+        public async Task<List<User>> GetDeletedUsers()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Customer");
+
+            var activeUsers = users.Where(u => u.Deleted == true).ToList();
 
             return activeUsers.Select(user => new User
             {
@@ -128,7 +144,7 @@ namespace VendManager.Identity.Services
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
 
-            var activeUsers = users.Where(u => u.Activated == true).ToList();
+            var activeUsers = users.Where(u => u.Activated == true && u.Deleted == false).ToList();
 
             return activeUsers.Select(user => new User
             {
