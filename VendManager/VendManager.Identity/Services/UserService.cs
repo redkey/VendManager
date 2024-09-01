@@ -128,7 +128,7 @@ namespace VendManager.Identity.Services
         {
             var users = await _userManager.GetUsersInRoleAsync("Customer");
 
-            var activeUsers = users.Where(u => u.Activated == false);
+            var activeUsers = users.Where(u => u.Activated == true).ToList();
 
             return activeUsers.Select(user => new User
             {
