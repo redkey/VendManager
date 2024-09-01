@@ -26,8 +26,8 @@ namespace VendManager.BlazorUI.Pages.Users
         private string Message;
         private bool isSubmitting = false;
 
-        private VendManager.BlazorUI.Services.Base.User user = new();
-        private VendManager.BlazorUI.Services.Base.UserDetails users = new();
+        private User user = new();
+        private Services.Base.UserDetails users = new();
 
         // private AnotherModel anotherModel = new AnotherModel();
 
@@ -36,7 +36,7 @@ namespace VendManager.BlazorUI.Pages.Users
             user = await IUserService.GetUsersDetails(Id);
         }
 
-        private async Task RegisterAdmin()
+        private async Task ActivateUser()
         {
             isSubmitting = true;
             StateHasChanged();
@@ -44,11 +44,13 @@ namespace VendManager.BlazorUI.Pages.Users
             try
             {
 
-                //var adminCreateRequest = new RegistrationRequest { Email = username, FirstName = firstname, LastName = lastname, Password = password, Role = "Admin", Enabled = true };
-                //await _client.RegisterAsync(adminCreateRequest);
-                //NavigationManager.NavigateTo("/viewusers");
-
-
+               
+                var user = await IUserService.GetUsersDetails(Id);
+                var aspNetUser = new User { Id = Id , Email = user.Email , FirstName = user.FirstName , LastName = user.LastName};
+                var userDetails = new Services.Base.UserDetails { EmailNotificationIntervalMinutes = EmailNotificationIntervalMinutes, EmailNotificationOnlyOutStockPeriodMinutes = EmailNotificationOnlyOutStockPeriodMinutes, SmsNotificationIntervalMinutes = SmsNotificationIntervalMinutes, SmSlNotificationOnlyOutStockPeriodMinutes = SmSlNotificationOnlyOutStockPeriodMinutes, EmailNotificationLastProcessedAtDateTimeUTC = DateTimeOffset.Now, SmSlNotificationLastProcessedAtDateTimeUTC = DateTimeOffset.Now, AspNetUserId = Id , AspNetUser = aspNetUser };
+                await IUserService.ActivateUser(Id);
+                await IUserService.CreateUserDetails(userDetails);
+                NavigationManager.NavigateTo("/viewusers");
 
             }
             catch (Exception e)

@@ -78,18 +78,34 @@ namespace VendManager.API.Controllers
         }
 
         [HttpPut]
-        [Route("deactivate/{userId}")]
-        public async Task<ActionResult> DeactivateUser(string userId)
+        [Route("undelete/{userId}")]
+        public async Task<ActionResult> UnDeleteUser(string userId)
             {
-            await _userService.DeactivateUser(userId);
+            await _userService.UnDeleteUser(userId);
             return Ok();
         }
 
         [HttpPut]
+        [Route("delete/{userId}")]
+        public async Task<ActionResult> DeleteUser(string userId)
+        {
+            await _userService.DeleteUser(userId);
+            return Ok();
+        }
+
+        [HttpPost]
         [Route("activate/{userId}")]
         public async Task<ActionResult> ActivateUser(string userId)
         {
             await _userService.ActivateUser(userId);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<ActionResult> CreateUserDetails([FromBody] UserDetails userDetails)
+        {
+            await _userService.CreateUserDetails(userDetails);
             return Ok();
         }
     }

@@ -19,7 +19,7 @@ namespace VendManager.Identity.Services
             _context = context;
         }
 
-        public async Task ActivateUser(string userId)
+        public async Task DeleteUser(string userId)
         {
             var user = await _context.FindAsync<ApplicationUser>(userId);
 
@@ -31,7 +31,31 @@ namespace VendManager.Identity.Services
             }
         }
 
-        public async Task DeactivateUser(string userId)
+        public async Task CreateUserDetails(Application.Models.Identity.UserDetails userDetails)
+        {
+            //find if user exists
+            var user = await _userManager.FindByIdAsync(userDetails.AspNetUserId);
+            if (user != null)
+            {
+                //Add user details to table
+
+                var userDetail = new Models.UserDetails
+                {
+                    EmailNotificationIntervalMinutes = userDetails.EmailNotificationIntervalMinutes,
+                    EmailNotificationOnlyOutStockPeriodMinutes = userDetails.EmailNotificationOnlyOutStockPeriodMinutes,
+                    EmailNotificationLastProcessedAtDateTimeUTC = userDetails.EmailNotificationLastProcessedAtDateTimeUTC,
+                    SMSNotificationIntervalMinutes = userDetails.SMSNotificationIntervalMinutes,
+                    SMSlNotificationOnlyOutStockPeriodMinutes = userDetails.SMSlNotificationOnlyOutStockPeriodMinutes,
+                    SMSlNotificationLastProcessedAtDateTimeUTC = userDetails.SMSlNotificationLastProcessedAtDateTimeUTC,
+                    AspNetUserId = userDetails.AspNetUserId
+                };
+
+                _context.UserDetails.Add(userDetail);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task UnDeleteUser(string userId)
         {
             var user = await _context.FindAsync<ApplicationUser>(userId);
             
@@ -130,6 +154,18 @@ namespace VendManager.Identity.Services
                 existingUserDetails.SMSlNotificationLastProcessedAtDateTimeUTC = userDetails.SMSlNotificationLastProcessedAtDateTimeUTC;
 
                 _context.UserDetails.Update(existingUserDetails);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task ActivateUser(string userId)
+        {
+            var user = await _context.FindAsync<ApplicationUser>(userId);
+
+            if (user != null)
+            {
+
+                user.Activated = true;
                 await _context.SaveChangesAsync();
             }
         }

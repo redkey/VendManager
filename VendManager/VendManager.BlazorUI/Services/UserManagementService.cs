@@ -21,10 +21,16 @@ namespace VendManager.BlazorUI.Services
             await _client.ActivateAsync(userId);
         }
 
+        public async Task UnDeleteUser(string userId)
+        {
+            await AddBearerToken();
+            await _client.UndeleteAsync(userId);
+        }
+
         public async Task DeleteUserDetails(string userId)
         {
             await AddBearerToken();
-            await _client.DeactivateAsync(userId);
+            await _client.DeleteAsync(userId);
         }
 
         public async Task<UserDetails> GetUserDetails(string userId)
@@ -44,6 +50,12 @@ namespace VendManager.BlazorUI.Services
         {
             await AddBearerToken();
             await _client.UserPUTAsync(userDetails);
+        }
+
+        public async Task CreateUserDetails(UserDetails userDetails)
+        {
+            await AddBearerToken();
+            await _client.CreateAsync(userDetails);
         }
     }
 }
