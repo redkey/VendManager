@@ -1,4 +1,6 @@
+using DevExpress.Blazor;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Hosting;
 using System.ComponentModel.DataAnnotations;
 using VendManager.BlazorUI.Services.Base;
 
@@ -6,6 +8,7 @@ namespace VendManager.BlazorUI.Pages.Users
 {
     public partial class AddAdmin
     {
+   
 
         [Required]
         private string username;
@@ -31,6 +34,7 @@ namespace VendManager.BlazorUI.Pages.Users
                 
                 var adminCreateRequest = new RegistrationRequest { Email = username, FirstName = firstname, LastName = lastname, Password = password , Role = "Admin" , Enabled = true};   
                 await _client.RegisterAsync(adminCreateRequest);
+                toastService.ShowSuccess($"Admin {firstname} successfully created");
                 NavigationManager.NavigateTo("/viewusers");
                 
                
@@ -51,5 +55,8 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             // Handle account creation logic here
         }
+
+      
+       
     }
 }

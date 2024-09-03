@@ -1,12 +1,9 @@
 using Blazored.LocalStorage;
-using DevExpress.XtraCharts;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Reflection;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
-using VendManager.BlazorUI.Providers;
 using VendManager.BlazorUI.Services;
 using VendManager.BlazorUI.Services.Base;
 using VendManager.BlazorUI.Services.HttpContext;
@@ -27,6 +24,7 @@ builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
+builder.Services.AddBlazoredToast();
 
 // Register CustomAuthenticationStateProvider
 //builder.Services.AddScoped<CustomAuthenticationStateProvider>();

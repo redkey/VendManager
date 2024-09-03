@@ -1,11 +1,13 @@
 ﻿@page "/addadmin"
 
+@using Blazored.Toast
 @using VendManager.BlazorUI.Contracts
 @using VendManager.BlazorUI.Services.Base
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IClient _client
 @inject NavigationManager _navigationManager
 @inject NavigationManager NavigationManager
+@inject Blazored.Toast.Services.IToastService toastService
 
 @* Include Bootstrap 5 *@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
@@ -88,6 +90,11 @@
     }
 </style>
 
+
+
+
+
+
 <div class="login-container">
     <div class="card login-card">
         <img src="./images/redkey.jpg" alt="Logo" class="login-logo" />
@@ -129,6 +136,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     function togglePasswordVisibility() {
