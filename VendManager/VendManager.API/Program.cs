@@ -34,14 +34,27 @@ namespace VendManager.API
 
             var app = builder.Build();
 
+            // Read the "ShowDetailedErrors" setting from appsettings.json
+            var showDetailedErrors = builder.Configuration.GetValue<bool>("ShowDetailedErrors");
 
             app.UseMiddleware<ExceptionMiddleware>();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //// Configure the HTTP request pipeline.
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
+
+            // Show developer errors if the setting is true
+            if (showDetailedErrors)
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // Optionally use a global exception handler for production errors
+                app.UseMiddleware<ExceptionMiddleware>();
             }
 
             app.UseHttpsRedirection();
@@ -51,6 +64,9 @@ namespace VendManager.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Use Swagger UI
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.MapControllers();
 

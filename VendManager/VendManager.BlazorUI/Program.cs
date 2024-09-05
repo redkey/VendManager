@@ -65,8 +65,16 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
+
+// Read the "ShowDetailedErrors" setting from appsettings.json
+var showDetailedErrors = builder.Configuration.GetValue<bool>("ShowDetailedErrors");
+
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (showDetailedErrors)
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
