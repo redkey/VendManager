@@ -27,6 +27,7 @@ namespace VendManager.BlazorUI.Pages.Users
 
                 var adminCreateRequest = new RegistrationRequest { Email = username, FirstName = firstname, LastName = lastname, Password = password, Role = "Customer", Enabled = true };
                 await _client.RegisterAsync(adminCreateRequest);
+                toastService.ShowSuccess($"Customer {firstname} successfully created");
                 NavigationManager.NavigateTo("/viewusers");
 
 

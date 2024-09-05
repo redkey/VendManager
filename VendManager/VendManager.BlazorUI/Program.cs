@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 using System.Reflection;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Data;
@@ -26,26 +27,11 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddBlazoredToast();
 
-// Register CustomAuthenticationStateProvider
-//builder.Services.AddScoped<CustomAuthenticationStateProvider>();
-//builder.Services.AddSingleton<CustomAuthenticationService>();
-
-// Add custom authentication state provider
-//builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
-
-// Add protected session storage
-//builder.Services.AddScoped<ProtectedSessionStorage>();
-
-//builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-//builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 // Register the token service
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
-// Register the HTTP client and use the custom handler
-//builder.Services.AddHttpClient("ApiClient")
-  //  .AddHttpMessageHandler<AuthHttpClientHandler>();
+
 
 builder.Services.AddScoped<TokenPersistenceService>();
 
@@ -59,12 +45,20 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
-
+// Bind ApiSettings from appsettings.json
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 
 //builder.Services.AddHttpClient();
-builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
+//builder.Services.AddHttpClient<IClient, Client>(client => client.BaseAddress = new Uri("https://localhost:7121/"));
+
+// Register HttpClient with BaseAddress from ApiSettings
+builder.Services.AddHttpClient<IClient, Client>((serviceProvider, client) =>
+{
+    var apiSettings = serviceProvider.GetRequiredService<IOptions<ApiSettings>>().Value;
+    client.BaseAddress = new Uri(apiSettings.BaseUrl);
+});
 builder.Services.AddScoped<IMachineService, MachineService>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
