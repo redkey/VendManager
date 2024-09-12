@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace VendManager.BlazorUI.Services
 {
+   
     public class RedirectService
     {
         private readonly NavigationManager _navigationManager;

@@ -1,6 +1,10 @@
 using Blazored.LocalStorage;
 using Blazored.Toast;
+using DevExpress.XtraCharts;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using VendManager.BlazorUI.Contracts;
@@ -31,9 +35,16 @@ builder.Services.AddBlazoredToast();
 // Register the token service
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
-
+builder.Services.AddDataProtection()
+     // Persist keys to a shared folder accessible by all servers
+     .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Users\Public\Keys"))
+     // Set a unique application name to ensure key isolation from other apps
+     .SetApplicationName("MyBlazorApp");
 
 builder.Services.AddScoped<TokenPersistenceService>();
+
+// Blazor server-side authentication
+builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -62,6 +73,7 @@ builder.Services.AddHttpClient<IClient, Client>((serviceProvider, client) =>
 builder.Services.AddScoped<IMachineService, MachineService>();
 builder.Services.AddScoped<IUserManagementService, UserManagementService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Host.SerilogConfiguration();
 
 var app = builder.Build();
 

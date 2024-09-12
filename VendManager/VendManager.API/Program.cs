@@ -4,6 +4,7 @@ using VendManager.Application;
 using VendManager.Infrastructure;
 using VendManager.Persistence;
 using VendManager.Identity;
+using Microsoft.AspNetCore.DataProtection;
 namespace VendManager.API
 {
     public class Program
@@ -17,6 +18,12 @@ namespace VendManager.API
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddIdentityServices(builder.Configuration);
             builder.Services.AddApplicationServices();
+
+            builder.Services.AddDataProtection()
+     // Persist keys to a shared folder accessible by all servers
+     .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Users\Public\Keys"))
+     // Set a unique application name to ensure key isolation from other apps
+     .SetApplicationName("MyBlazorApp");
 
             builder.Services.AddControllers();
 

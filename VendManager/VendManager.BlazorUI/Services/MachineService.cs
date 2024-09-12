@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Blazored.LocalStorage;
 using DevExpress.PivotGrid.Criteria;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Models;
 using VendManager.BlazorUI.Services.Base;
@@ -8,6 +10,7 @@ using VendManager.BlazorUI.Services.HttpContext;
 
 namespace VendManager.BlazorUI.Services
 {
+    
     public class MachineService : BaseHttpService, IMachineService
     {
         
@@ -30,7 +33,9 @@ namespace VendManager.BlazorUI.Services
 
         public async Task<List<MachineVM>> GetAllMachinesWithSensorDetails()
         {
-           await AddBearerToken();
+
+            Log.Information("Get bearer token from GetAllMachinesWithSenso Details");
+            await AddBearerToken();
             var machines = await _client.GetAllMachinesWithSensorDetailsAsync();
             var machinesVM = _mapper.Map<List<MachineVM>>(machines);
             return machinesVM;

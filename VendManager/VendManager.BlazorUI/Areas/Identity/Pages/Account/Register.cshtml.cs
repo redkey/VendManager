@@ -7,6 +7,7 @@ using VendManager.BlazorUI.Services.Base;
 
 namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
 {
+
     public class RegisterModel : PageModel
     {
         private readonly IClient _client;   

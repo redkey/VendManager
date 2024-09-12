@@ -14,7 +14,7 @@ namespace VendManager.BlazorUI.Pages.Users
         public List<User> Users { get; set; }
 
         private bool isLoading = true;
-
+        private string userRole;
         public string Message { get; set; } = string.Empty;
         protected void CreateMachine()
         {
@@ -24,6 +24,8 @@ namespace VendManager.BlazorUI.Pages.Users
         {
             if (firstRender)
             {
+                // Fetch user role
+                userRole = await UserService.GetRoleAsync();
                 var users = await Client.DeactivatesusersAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval

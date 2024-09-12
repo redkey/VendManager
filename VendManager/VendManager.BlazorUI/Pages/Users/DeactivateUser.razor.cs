@@ -21,12 +21,14 @@ namespace VendManager.BlazorUI.Pages.Users
 
         private bool isLoading = true;
         bool Visible { get; set; } = false;
-
+        private string userRole;
         public string Message { get; set; } = string.Empty;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                // Fetch user role
+                userRole = await UserService.GetRoleAsync();
                 var users = await Client.DeletedusersAsync();
                 Users = users.ToList();
                 isLoading = false; // Set loading to false after data retrieval

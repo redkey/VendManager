@@ -20,7 +20,7 @@
             <CellDisplayTemplate>
                 <div style="width: 100%; text-align: center;">
 
-                    @if (UserService.GetRole() == "Admin")
+                    @if (userRole == "Admin")
                     {
                         <a href="" @onclick:preventDefault @onclick="() => NavigateToEdit(((MachineVM)context.DataItem).ID)" title="Edit">
                             <i class="fas fa-edit"></i>|

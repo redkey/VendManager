@@ -19,7 +19,7 @@
             <CellDisplayTemplate>
                 <div style="width: 100%; text-align: center;">
 
-                    @if (UserService.GetRole() == "Admin")
+                    @if (userRole == "Admin")
                     {
                         <a href="" @onclick:preventDefault @onclick="() => ActivateUser(true, ((User)context.DataItem).Id)" title="Activate">
                             <i class="fas fa-unlock"></i>

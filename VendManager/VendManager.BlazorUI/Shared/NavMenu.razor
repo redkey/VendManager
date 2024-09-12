@@ -1,4 +1,5 @@
-﻿@using VendManager.BlazorUI.Services
+﻿@using Serilog
+@using VendManager.BlazorUI.Services
 @inject IUserService UserService
 
 <div id="sidebar" class="@(IsExpanded ? "expanded": "")">
@@ -28,20 +29,27 @@
                     <div @onclick="Collapse">
                         <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
                             <Items>
-                                <DxMenuItem NavigateUrl="/" Text="@UserService.GetUserName()" CssClass="menu-item" IconCssClass="fas fa-house-user"></DxMenuItem>
+                                <DxMenuItem NavigateUrl="/" Text="@userName" CssClass="menu-item" IconCssClass="fas fa-house-user"></DxMenuItem>
                                 <DxMenuItem NavigateUrl="/machines" Text="Vending Machines" CssClass="menu-item" IconCssClass="fas fa-server "></DxMenuItem>
-                                @if (UserService.GetRole() == "Admin")
+                                @try
                                 {
-                                    <DxMenuItem NavigateUrl="" Text="User Management" CssClass="menu-item" IconCssClass="fas fa-user-cog">
-                                        <Items>
-                                            <DxMenuItem NavigateUrl="/addadmin" Text="Add Admin" IconCssClass="fas fa-user-plus" />
-                                            <DxMenuItem NavigateUrl="/createuser" Text="Add Customer" IconCssClass="fas fa-user-plus" />
-                                            <DxMenuItem NavigateUrl="/activateuser" Text="Activate User" IconCssClass="fas fa-user-check" />
-                                            <DxMenuItem NavigateUrl="/viewusers" Text="View Users" IconCssClass="fas fa-users" />
-                                            <DxMenuItem NavigateUrl="/viewdeactivatedusers" Text="Deleted Users" IconCssClass="fas fa-users" />
-                                        </Items>
-                                    </DxMenuItem>
-                                }     
+                                    if (userRole == "Admin")
+                                    {
+                                        <DxMenuItem NavigateUrl="" Text="User Management" CssClass="menu-item" IconCssClass="fas fa-user-cog">
+                                            <Items>
+                                                <DxMenuItem NavigateUrl="/addadmin" Text="Add Admin" IconCssClass="fas fa-user-plus" />
+                                                <DxMenuItem NavigateUrl="/createuser" Text="Add Customer" IconCssClass="fas fa-user-plus" />
+                                                <DxMenuItem NavigateUrl="/activateuser" Text="Activate User" IconCssClass="fas fa-user-check" />
+                                                <DxMenuItem NavigateUrl="/viewusers" Text="View Users" IconCssClass="fas fa-users" />
+                                                <DxMenuItem NavigateUrl="/viewdeactivatedusers" Text="Deleted Users" IconCssClass="fas fa-users" />
+                                            </Items>
+                                        </DxMenuItem>
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Error(ex, "Failed to get user role");
+                                }
                             </Items>
                         </DxMenu>
                     </div>
@@ -62,10 +70,18 @@
 
 @code {
 
-    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
+    // [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
     public bool IsExpanded { get; set; } = false;
 
-  
+
+    private string userRole;
+    private string userName;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userRole = await UserService.GetRoleAsync();
+        userName = await UserService.GetUserNameAsync();
+    }
 
     void TriggerIsExpanded() {
         IsExpanded = !IsExpanded;

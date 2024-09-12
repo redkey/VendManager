@@ -5,6 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Remove="Pages\Machines\SensorHistory.razor" />
     <Content Remove="Pages\Users\Details.razor" />
   </ItemGroup>
@@ -15,6 +21,8 @@
     <PackageReference Include="DevExpress.Blazor" Version="23.2.3" />
     <PackageReference Include="DevExpress.Blazor.Reporting.JSBasedControls" Version="23.2.3" />
     <PackageReference Include="DevExpress.Blazor.Reporting.Viewer" Version="23.2.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>

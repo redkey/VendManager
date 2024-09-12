@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Serilog;
 using System.Security.Claims;
 using VendManager.BlazorUI.Contracts;
 using VendManager.BlazorUI.Models;
@@ -16,6 +17,8 @@ using VendManager.BlazorUI.Services.HttpContext;
 
 namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
 {
+
+  
     public class LoginModel : PageModel
     {
  
@@ -49,8 +52,9 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
             ReturnUrl = Url.Content("~/");
         }
 
-       
 
+
+     
         public async Task<IActionResult> OnPostAsync()
         {
             ReturnUrl = Url.Content("~/");
@@ -63,24 +67,41 @@ namespace RouterManagerServer.UI.Areas.Identity.Pages.Account
 
                 if (response.Token != null)
                 {
-                  //  var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
+          
 
-                    // Store the token using TokenService
+                    Log.Information($"******************************************* Email {response.Email}");
+                    Log.Information($"******************************************* Id {response.Id}");
+                    Log.Information($"******************************************* Token {response.Token}");
+                    Log.Information($"******************************************* Username{response.UserName}");
+                    Log.Information($"******************************************* Role {response.Roles.First()}");
+
                     Token = response.Token;
 
                     var claims = new[]
                     {
                         new Claim(ClaimTypes.Name, Input.Email),
                         new Claim("JWT", response.Token),
-                        new Claim("Role" , response.Roles.First())
+                        new Claim(ClaimTypes.Role, response.Roles.First()) // Use ClaimTypes.Role to ensure compatibility
                     };
-
-                
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = Input.KeepSignedIn });
+
+                    //var claims = new[]
+                    //{
+                    //    new Claim(ClaimTypes.Name, Input.Email),
+                    //    new Claim("JWT", response.Token),
+                    //    new Claim("Role" , response.Roles.First())
+                    //};
+
+                
+
+                    //var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    //var principal = new ClaimsPrincipal(identity);
+
+                    //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties { IsPersistent = Input.KeepSignedIn });
 
                     var token = response.Token;
                     return LocalRedirect($"/Identity/Account/StoreToken?Token={token}");

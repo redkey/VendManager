@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using DevExpress.CodeParser;
+using Serilog;
 using System.Net.Http.Headers;
 using VendManager.BlazorUI.Services.HttpContext;
 
@@ -36,6 +37,7 @@ namespace VendManager.BlazorUI.Services.Base
         protected async Task AddBearerToken()
         {
             var token = await _tokenService.GetTokenAsync();
+            Log.Information($"Token is {token}");
             if (!string.IsNullOrEmpty(token))
             {
                 _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
